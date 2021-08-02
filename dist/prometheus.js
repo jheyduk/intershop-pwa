@@ -9,6 +9,11 @@ const requestCounts = new client.Gauge({
   help: 'counter for requests labeled with: method, status_code, theme, base_href, path',
   labelNames: ['method', 'status_code', 'theme', 'base_href', 'path'],
 });
+const statusCodeCounts = new client.Gauge({
+  name: 'http_request_status_code_counts',
+  help: 'counter for requests labeled with: status_code',
+  labelNames: ['method', 'status_code', 'theme', 'base_href', 'path'],
+});
 const requestDuration = new client.Histogram({
   name: 'http_request_duration_seconds',
   help: 'duration histogram of http responses labeled with: status_code, theme',
@@ -66,36 +71,60 @@ const pm2UnstableRestarts = new client.Gauge({
 const pm2ProcessUptime = new client.Gauge({
   name: 'pm2_process_uptime',
   help: 'uptime for pm2 processes',
-  labelNames: ['name'],
+  labelNames: ['name', 'pid'],
 });
 
 const pm2ProcessCreated = new client.Gauge({
   name: 'pm2_process_create',
   help: 'creation timestamp for pm2 processes',
-  labelNames: ['name'],
+  labelNames: ['name', 'pid'],
 });
 
 const pm2ProcessRestartTime = new client.Gauge({
   name: 'pm2_process_restart_time',
   help: 'restart time for pm2 processes',
-  labelNames: ['name'],
+  labelNames: ['name', 'pid'],
 });
 
 const pm2ProcessUnstableRestarts = new client.Gauge({
   name: 'pm2_process_unstable_restarts',
   help: 'unstable restarts for pm2 processes',
-  labelNames: ['name'],
+  labelNames: ['name', 'pid'],
 });
 
 const pm2ProcessMemory = new client.Gauge({
   name: 'pm2_process_memory',
   help: 'memory usage for pm2 processes',
-  labelNames: ['name'],
+  labelNames: ['name', 'pid'],
 });
 
 const pm2ProcessCPU = new client.Gauge({
   name: 'pm2_process_cpu',
   help: 'cpu usage for pm2 processes',
+  labelNames: ['name', 'pid'],
+});
+
+const pm2ProcessStatusOnline = new client.Gauge({
+  name: 'pm2_process_status_online',
+  help: 'status for pm2 process is online',
+  labelNames: ['name'],
+});
+
+const pm2ProcessStatusLaunching = new client.Gauge({
+  name: 'pm2_process_status_launching',
+  help: 'status for pm2 process is launching',
+  labelNames: ['name'],
+});
+
+const pm2ProcessStatusStopped = new client.Gauge({
+  name: 'pm2_process_status_stopped',
+  help: 'status for pm2 process is stopped',
+  labelNames: ['name'],
+});
+
+const pm2ProcessStatusErrored = new client.Gauge({
+  name: 'pm2_process_status_errored',
+  help: 'status for pm2 process is errored',
   labelNames: ['name'],
 });
 
@@ -114,6 +143,7 @@ app.post('/report', (req, res) => {
     let path = cleanUrl.replace(base_href, '');
 
     requestCounts.inc({ method, status_code, theme, base_href, path });
+    statusCodeCounts.inc({ status_code });
     requestDuration.labels({ status_code, theme, base_href, path }).observe(duration / 1000);
   });
   res.status(204).send();
@@ -134,6 +164,11 @@ app.get('/metrics', async (_, res) => {
           const pm2ProcessCounts = list.reduce((acc, p) => ({ ...acc, [p.name]: (acc[p.name] || 0) + 1 }), {});
           Object.entries(pm2ProcessCounts).forEach(([name, value]) => {
             pm2Processes.labels({ name }).set(value);
+
+            pm2ProcessStatusOnline.labels({ name }).set(0);
+            pm2ProcessStatusLaunching.labels({ name }).set(0);
+            pm2ProcessStatusStopped.labels({ name }).set(0);
+            pm2ProcessStatusErrored.labels({ name }).set(0);
           });
           const pm2ProcessMemoryCounts = list.reduce(
             (acc, p) => ({ ...acc, [p.name]: (acc[p.name] || 0) + p.monit?.memory || 0 }),
@@ -181,25 +216,37 @@ app.get('/metrics', async (_, res) => {
           const pm2ProcessDetails = list.reduce(
             (acc, p) => ({
               ...acc,
-              [`${p.name}_${p.pid}`]: {
+              [p.pid]: {
+                name: p.name,
                 uptime: p.pm2_env.pm_uptime,
                 created: p.pm2_env.created_at,
                 restart_time: p.pm2_env.restart_time,
                 unstable_restarts: p.pm2_env.unstable_restarts,
                 memory: p.monit.memory,
                 cpu: p.monit.cpu,
+                status: p.pm2_env.status,
               },
             }),
             {}
           );
 
-          Object.entries(pm2ProcessDetails).forEach(([name, value]) => {
-            pm2ProcessUptime.labels(name).set(value.uptime);
-            pm2ProcessCreated.labels(name).set(value.created);
-            pm2ProcessRestartTime.labels(name).set(value.restart_time);
-            pm2ProcessUnstableRestarts.labels(name).set(value.unstable_restarts);
-            pm2ProcessMemory.labels(name).set(value.memory);
-            pm2ProcessCPU.labels(name).set(value.cpu);
+          Object.entries(pm2ProcessDetails).forEach(([pid, value]) => {
+            pm2ProcessUptime.labels({ name: value.name, pid }).set(value.uptime);
+            pm2ProcessCreated.labels({ name: value.name, pid }).set(value.created);
+            pm2ProcessRestartTime.labels({ name: value.name, pid }).set(value.restart_time);
+            pm2ProcessUnstableRestarts.labels({ name: value.name, pid }).set(value.unstable_restarts);
+            pm2ProcessMemory.labels({ name: value.name, pid }).set(value.memory);
+            pm2ProcessCPU.labels({ name: value.name, pid }).set(value.cpu);
+
+            if (value.status === 'online') {
+              pm2ProcessStatusOnline.labels({ name: value.name }).inc();
+            } else if (value.status === 'launching') {
+              pm2ProcessStatusLaunching.labels({ name: value.name }).inc();
+            } else if (value.status === 'stopped') {
+              pm2ProcessStatusStopped.labels({ name: value.name }).inc();
+            } else if (value.status === 'errored') {
+              pm2ProcessStatusErrored.labels({ name: value.name }).inc();
+            }
           });
         }
       });

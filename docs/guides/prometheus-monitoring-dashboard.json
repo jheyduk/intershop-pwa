@@ -15,115 +15,196 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
+  "id": 4,
   "links": [],
   "panels": [
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": null,
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
         },
         "overrides": []
       },
-      "fill": 1,
-      "fillGradient": 0,
       "gridPos": {
         "h": 8,
-        "w": 19,
+        "w": 10,
         "x": 0,
         "y": 0
       },
-      "hiddenSeries": false,
-      "id": 7,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
+      "id": 19,
       "options": {
-        "alertThreshold": true
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
       },
-      "percentage": false,
-      "pluginVersion": "7.2.0",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
       "targets": [
         {
-          "expr": "avg(increase(nginx_http_requests_total{job=\"pwa-nginx\"}[1m]))",
+          "exemplar": true,
+          "expr": "pm2_cpu{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"default\"}/pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"default\"}",
           "interval": "",
-          "legendFormat": "nginx",
+          "legendFormat": "default",
           "refId": "A"
         },
         {
-          "expr": "sum(increase(http_request_duration_seconds_sum{job=\"pwa-ssr\"}[1m]))",
+          "exemplar": true,
+          "expr": "pm2_cpu{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"blue\"}/pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"blue\"}",
+          "hide": false,
           "interval": "",
-          "legendFormat": "ssr",
+          "legendFormat": "blue",
           "refId": "B"
         }
       ],
-      "thresholds": [],
-      "timeFrom": "30m",
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "Requests 1m Window",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
+      "title": "CPU Usage",
+      "type": "timeseries"
     },
     {
       "datasource": null,
-      "description": "",
       "fieldConfig": {
         "defaults": {
-          "custom": {},
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 9,
+        "x": 10,
+        "y": 0
+      },
+      "id": 17,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "pm2_memory{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"default\"}/pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"default\"}",
+          "interval": "",
+          "legendFormat": "default",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "pm2_memory{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"blue\"}/pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"blue\"}",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "blue",
+          "refId": "B"
+        }
+      ],
+      "title": "Memory Usage",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -142,201 +223,45 @@
         "overrides": []
       },
       "gridPos": {
-        "h": 8,
+        "h": 4,
         "w": 5,
         "x": 19,
         "y": 0
-      },
-      "id": 3,
-      "options": {
-        "colorMode": "value",
-        "graphMode": "area",
-        "justifyMode": "auto",
-        "orientation": "auto",
-        "reduceOptions": {
-          "calcs": ["mean"],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "7.2.0",
-      "targets": [
-        {
-          "expr": "sum(nginx_up{job=\"pwa-nginx\"})",
-          "format": "time_series",
-          "instant": true,
-          "interval": "",
-          "intervalFactor": 1,
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "nginx Instances",
-      "type": "stat"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "fill": 1,
-      "fillGradient": 0,
-      "gridPos": {
-        "h": 8,
-        "w": 19,
-        "x": 0,
-        "y": 8
-      },
-      "hiddenSeries": false,
-      "id": 5,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 1,
-      "nullPointMode": "null",
-      "options": {
-        "alertThreshold": true
-      },
-      "percentage": false,
-      "pluginVersion": "7.2.0",
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{job=\"pwa-ssr\"}[5m])) by (le))",
-          "interval": "",
-          "legendFormat": "",
-          "refId": "A"
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": "30m",
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "SSR Mean Render Time",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "datasource": null,
-      "fieldConfig": {
-        "defaults": {
-          "custom": {},
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 8,
-        "w": 5,
-        "x": 19,
-        "y": 8
       },
       "id": 2,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
-        "justifyMode": "auto",
+        "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
           "calcs": ["mean"],
           "fields": "",
           "values": false
         },
+        "text": {},
         "textMode": "auto"
       },
-      "pluginVersion": "7.2.0",
+      "pluginVersion": "8.0.5",
       "targets": [
         {
-          "expr": "sum(up{job=\"pwa-ssr\"})",
+          "exemplar": true,
+          "expr": "pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"default\"}",
           "format": "time_series",
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "",
+          "legendFormat": "default",
           "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"blue\"}",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "blue",
+          "refId": "B"
         }
       ],
       "timeFrom": null,
@@ -345,27 +270,618 @@
       "type": "stat"
     },
     {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
       "datasource": null,
       "fieldConfig": {
         "defaults": {
-          "custom": {}
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "decbytes"
         },
         "overrides": []
       },
-      "fill": 1,
-      "fillGradient": 0,
+      "gridPos": {
+        "h": 7,
+        "w": 5,
+        "x": 19,
+        "y": 4
+      },
+      "id": 11,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "pm2_memory{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"default\"}/pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"default\"}",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "default",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "pm2_memory{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"blue\"}/pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"blue\"}",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "blue",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "pm2_memory{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"distributor\"}/pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"distributor\"}",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "distributor",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "pm2_memory{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"prometheus\"}/pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"prometheus\"}",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "prometheus",
+          "refId": "D"
+        }
+      ],
+      "title": "Average Memory Usage",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 19,
+        "x": 0,
+        "y": 8
+      },
+      "id": 7,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(increase(http_request_status_code_counts{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\"}[2m]))",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "ssr",
+          "refId": "B"
+        }
+      ],
+      "timeFrom": "30m",
+      "timeShift": null,
+      "title": "Requests 2m Window",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "percentunit"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 5,
+        "x": 19,
+        "y": 11
+      },
+      "id": 13,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "pm2_cpu{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"default\"}/pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"default\"}",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "default",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "pm2_cpu{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"blue\"}/pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"blue\"}",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "blue",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "pm2_cpu{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"distributor\"}/pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"distributor\"}",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "distributor",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "pm2_cpu{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"prometheus\"}/pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"prometheus\"}",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "prometheus",
+          "refId": "D"
+        }
+      ],
+      "title": "Average CPU Usage",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
       "gridPos": {
         "h": 8,
         "w": 19,
         "x": 0,
         "y": 16
       },
-      "hiddenSeries": false,
+      "id": 5,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\"}[5m])) by (le))",
+          "interval": "",
+          "legendFormat": "ssr",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": "30m",
+      "timeShift": null,
+      "title": "SSR Mean Render Time (0.95-quantile)",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 5,
+        "x": 19,
+        "y": 18
+      },
+      "id": 15,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "pm2_process_restarts{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"default\"}",
+          "instant": true,
+          "interval": "",
+          "legendFormat": "default",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "pm2_process_restarts{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"blue\"}",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "blue",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "pm2_process_restarts{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"distributor\"}",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "distributor",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "pm2_process_restarts{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"prometheus\"}",
+          "hide": false,
+          "instant": true,
+          "interval": "",
+          "legendFormat": "prometheus",
+          "refId": "D"
+        }
+      ],
+      "title": "Process Restarts",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 19,
+        "x": 0,
+        "y": 24
+      },
       "id": 9,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(increase(http_request_status_code_counts{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", status_code=~\"[4-5][0-9][0-9]\"}[2m]))",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "timeFrom": "30m",
+      "timeShift": null,
+      "title": "SSR Status >=400",
+      "type": "timeseries"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 5,
+        "x": 19,
+        "y": 25
+      },
+      "id": 23,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(pm2_process_status_online{name=\"default\"})",
+          "instant": false,
+          "interval": "",
+          "legendFormat": "online",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(pm2_process_status_launching{name=\"default\"})",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "launching",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(pm2_process_status_stopped{name=\"default\"})",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "stopped",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(pm2_process_status_errored{name=\"default\"})",
+          "hide": false,
+          "instant": false,
+          "interval": "",
+          "legendFormat": "errored",
+          "refId": "D"
+        }
+      ],
+      "title": "Process: Default",
+      "type": "stat"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 19,
+        "x": 0,
+        "y": 32
+      },
+      "hiddenSeries": false,
+      "id": 21,
       "legend": {
         "avg": false,
         "current": false,
@@ -382,7 +898,7 @@
         "alertThreshold": true
       },
       "percentage": false,
-      "pluginVersion": "7.2.0",
+      "pluginVersion": "8.0.5",
       "pointradius": 2,
       "points": false,
       "renderer": "flot",
@@ -392,17 +908,26 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "sum(increase(http_request_duration_seconds_count{job=\"pwa-ssr\",status_code=~\"5[0-9][0-9]\"}[1m]))",
+          "exemplar": true,
+          "expr": "increase(pm2_process_restarts{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"default\"}[2m])",
           "interval": "",
-          "legendFormat": "",
+          "legendFormat": "default",
           "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "increase(pm2_process_restarts{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"blue\"}[2m])",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "blue",
+          "refId": "B"
         }
       ],
       "thresholds": [],
-      "timeFrom": "30m",
+      "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "SSR Status >=500",
+      "title": "Restarts",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -418,14 +943,16 @@
       },
       "yaxes": [
         {
+          "$$hashKey": "object:136",
           "format": "short",
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
+          "$$hashKey": "object:137",
           "format": "short",
           "label": null,
           "logBase": 1,
@@ -438,22 +965,103 @@
         "align": false,
         "alignLevel": null
       }
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 5,
+        "x": 19,
+        "y": 33
+      },
+      "id": 25,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": ["lastNotNull"],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(pm2_process_status_online{name=\"blue\"})",
+          "interval": "",
+          "legendFormat": "online",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(pm2_process_status_launching{name=\"blue\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "launching",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(pm2_process_status_stopped{name=\"blue\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "stopped",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(pm2_process_status_errored{name=\"blue\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "errored",
+          "refId": "D"
+        }
+      ],
+      "title": "Process: Blue",
+      "type": "stat"
     }
   ],
   "refresh": "5s",
-  "schemaVersion": 26,
+  "schemaVersion": 30,
   "style": "dark",
   "tags": [],
   "templating": {
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "PWA",
-  "uid": "IXapu1KMk",
-  "version": 8
+  "uid": "D_cLEuZ7z",
+  "version": 10
 }
