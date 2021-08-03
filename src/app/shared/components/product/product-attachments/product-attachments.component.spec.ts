@@ -17,14 +17,8 @@ describe('Product Attachments Component', () => {
       {
         name: 'A',
         type: 'typeA',
-        value: 'valueA',
-        key: 'keyA',
         description: 'descriptionA',
-        link: {
-          title: 'titleA',
-          type: 'typeA',
-          uri: 'uriA',
-        },
+        url: 'urlA',
       },
     ];
     await TestBed.configureTestingModule({
