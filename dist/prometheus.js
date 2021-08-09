@@ -1,6 +1,15 @@
 const express = require('express');
 const pm2 = require('pm2');
 
+let ports = require('./ecosystem-ports').ports;
+
+if (process.env.ACTIVE_THEMES) {
+  const active = process.env.ACTIVE_THEMES.split(',');
+  ports = Object.entries(ports)
+    .filter(([theme]) => active.includes(theme))
+    .reduce((acc, [k, v]) => ({ ...acc, [k]: v }), {});
+}
+
 const DEBUG = /^(on|1|true|yes)$/i.test(process.env.DEBUG);
 
 const client = require('prom-client');
@@ -98,6 +107,36 @@ const pm2ProcessMemory = new client.Gauge({
   labelNames: ['name', 'pid'],
 });
 
+const pm2ProcessMemoryArrayBuffers = new client.Gauge({
+  name: 'pm2_process_memory_array_buffers',
+  help: 'array buffers for pm2 processes',
+  labelNames: ['name', 'pid'],
+});
+
+const pm2ProcessMemoryExternal = new client.Gauge({
+  name: 'pm2_process_memory_external',
+  help: 'memory external usage for pm2 processes',
+  labelNames: ['name', 'pid'],
+});
+
+const pm2ProcessMemoryHeapUsed = new client.Gauge({
+  name: 'pm2_process_memory_heap_used',
+  help: 'memory heap used for pm2 processes',
+  labelNames: ['name', 'pid'],
+});
+
+const pm2ProcessMemoryHeapTotal = new client.Gauge({
+  name: 'pm2_process_memory_heap_total',
+  help: 'memory heap total for pm2 processes',
+  labelNames: ['name', 'pid'],
+});
+
+const pm2ProcessMemoryRSS = new client.Gauge({
+  name: 'pm2_process_memory_rss',
+  help: 'memory rss usage for pm2 processes',
+  labelNames: ['name', 'pid'],
+});
+
 const pm2ProcessCPU = new client.Gauge({
   name: 'pm2_process_cpu',
   help: 'cpu usage for pm2 processes',
@@ -161,6 +200,42 @@ app.get('/metrics', async (_, res) => {
     if (!err1) {
       pm2.list((err2, list) => {
         if (!err2) {
+          console.log(list);
+
+          Object.entries(ports).map(([theme]) =>
+            list
+              .filter(item => item.name === theme)
+              .map(element =>
+                pm2.sendDataToProcessId(element.pm2_env.pm_id, {
+                  type: 'process:msg',
+                  data: {},
+                  topic: 'process memory',
+                })
+              )
+          );
+
+          pm2.launchBus(function (err, pm2_bus) {
+            if (!err) {
+              pm2_bus.on('process:memory', function (packet) {
+                pm2ProcessMemoryArrayBuffers
+                  .labels({ name: packet.process.name, pid: packet.process.pm_id })
+                  .set(packet.data.memoryUsage.arrayBuffers);
+                pm2ProcessMemoryExternal
+                  .labels({ name: packet.process.name, pid: packet.process.pm_id })
+                  .set(packet.data.memoryUsage.external);
+                pm2ProcessMemoryHeapUsed
+                  .labels({ name: packet.process.name, pid: packet.process.pm_id })
+                  .set(packet.data.memoryUsage.heapUsed);
+                pm2ProcessMemoryHeapTotal
+                  .labels({ name: packet.process.name, pid: packet.process.pm_id })
+                  .set(packet.data.memoryUsage.heapTotal);
+                pm2ProcessMemoryRSS
+                  .labels({ name: packet.process.name, pid: packet.process.pm_id })
+                  .set(packet.data.memoryUsage.rss);
+              });
+            }
+          });
+
           const pm2ProcessCounts = list.reduce((acc, p) => ({ ...acc, [p.name]: (acc[p.name] || 0) + 1 }), {});
           Object.entries(pm2ProcessCounts).forEach(([name, value]) => {
             pm2Processes.labels({ name }).set(value);
@@ -216,7 +291,7 @@ app.get('/metrics', async (_, res) => {
           const pm2ProcessDetails = list.reduce(
             (acc, p) => ({
               ...acc,
-              [p.pid]: {
+              [p.pm_id]: {
                 name: p.name,
                 uptime: p.pm2_env.pm_uptime,
                 created: p.pm2_env.created_at,

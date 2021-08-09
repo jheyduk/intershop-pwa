@@ -105,6 +105,17 @@ export function app() {
     }
   }
 
+  process.on('message', function (data) {
+    if (data.topic === 'process memory') {
+      process.send({
+        type: 'process:memory',
+        data: {
+          memoryUsage: process.memoryUsage(),
+        },
+      });
+    }
+  });
+
   // Express server
   const server = express();
 
