@@ -9,6 +9,7 @@ import * as proxy from 'express-http-proxy';
 import { AppServerModule, ICM_WEB_URL, HYBRID_MAPPING_TABLE, environment, APP_BASE_HREF } from './src/main.server';
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import { getDeployURLFromEnv, setDeployUrlInFile } from './src/ssr/deploy-url';
+import { createHeapSnapshot } from 'scripts/create-heap-snapshot';
 
 const PORT = process.env.PORT || 4200;
 
@@ -377,6 +378,8 @@ export function app() {
   server.use('*', angularUniversal);
 
   console.log('ICM_BASE_URL is', ICM_BASE_URL);
+
+  setInterval(createHeapSnapshot, 120000);
 
   return server;
 }

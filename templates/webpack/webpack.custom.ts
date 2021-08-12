@@ -145,6 +145,7 @@ export default (config: Configuration, angularJsonConfig: CustomWebpackBrowserSc
 
   if (production) {
     // keep module names for debugging
+    config.optimization.minimize = false;
     config.optimization.minimizer.forEach((m: WebpackPluginInstance) => {
       if (m.options && m.options.terserOptions) {
         m.options.terserOptions.keep_classnames = /.*Module$/;

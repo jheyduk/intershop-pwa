@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 4,
+  "id": 1,
   "links": [],
   "panels": [
     {
@@ -94,14 +94,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "pm2_cpu{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"default\"}/pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"default\"}",
+          "expr": "pm2_cpu{name=\"default\"}/pm2_processes{name=\"default\"}",
           "interval": "",
           "legendFormat": "default",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "pm2_cpu{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"blue\"}/pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"blue\"}",
+          "expr": "pm2_cpu{name=\"blue\"}/pm2_processes{name=\"blue\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "blue",
@@ -184,14 +184,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "pm2_memory{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"default\"}/pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"default\"}",
+          "expr": "pm2_memory{name=\"default\"}/pm2_processes{name=\"default\"}",
           "interval": "",
           "legendFormat": "default",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "pm2_memory{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"blue\"}/pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"blue\"}",
+          "expr": "pm2_memory{name=\"blue\"}/pm2_processes{name=\"blue\"}",
           "hide": false,
           "interval": "",
           "legendFormat": "blue",
@@ -235,7 +235,9 @@
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["mean"],
+          "calcs": [
+            "mean"
+          ],
           "fields": "",
           "values": false
         },
@@ -246,7 +248,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"default\"}",
+          "expr": "pm2_processes{name=\"default\"}",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -256,7 +258,7 @@
         },
         {
           "exemplar": true,
-          "expr": "pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"blue\"}",
+          "expr": "pm2_processes{name=\"blue\"}",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -303,7 +305,9 @@
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -314,7 +318,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "pm2_memory{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"default\"}/pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"default\"}",
+          "expr": "pm2_memory{name=\"default\"}/pm2_processes{name=\"default\"}",
           "instant": true,
           "interval": "",
           "legendFormat": "default",
@@ -322,7 +326,7 @@
         },
         {
           "exemplar": true,
-          "expr": "pm2_memory{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"blue\"}/pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"blue\"}",
+          "expr": "pm2_memory{name=\"blue\"}/pm2_processes{name=\"blue\"}",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -331,7 +335,7 @@
         },
         {
           "exemplar": true,
-          "expr": "pm2_memory{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"distributor\"}/pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"distributor\"}",
+          "expr": "pm2_memory{name=\"distributor\"}/pm2_processes{name=\"distributor\"}",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -340,7 +344,7 @@
         },
         {
           "exemplar": true,
-          "expr": "pm2_memory{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"prometheus\"}/pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"prometheus\"}",
+          "expr": "pm2_memory{name=\"prometheus\"}/pm2_processes{name=\"prometheus\"}",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -428,7 +432,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(increase(http_request_status_code_counts{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\"}[2m]))",
+          "expr": "sum(increase(http_request_status_code_counts{}[2m]))",
           "instant": false,
           "interval": "",
           "legendFormat": "ssr",
@@ -478,7 +482,9 @@
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -489,7 +495,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "pm2_cpu{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"default\"}/pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"default\"}",
+          "expr": "pm2_cpu{name=\"default\"}/pm2_processes{name=\"default\"}",
           "instant": true,
           "interval": "",
           "legendFormat": "default",
@@ -497,7 +503,7 @@
         },
         {
           "exemplar": true,
-          "expr": "pm2_cpu{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"blue\"}/pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"blue\"}",
+          "expr": "pm2_cpu{name=\"blue\"}/pm2_processes{name=\"blue\"}",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -506,7 +512,7 @@
         },
         {
           "exemplar": true,
-          "expr": "pm2_cpu{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"distributor\"}/pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"distributor\"}",
+          "expr": "pm2_cpu{name=\"distributor\"}/pm2_processes{name=\"distributor\"}",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -515,7 +521,7 @@
         },
         {
           "exemplar": true,
-          "expr": "pm2_cpu{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"prometheus\"}/pm2_processes{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"prometheus\"}",
+          "expr": "pm2_cpu{name=\"prometheus\"}/pm2_processes{name=\"prometheus\"}",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -600,7 +606,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\"}[5m])) by (le))",
+          "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{}[5m])) by (le))",
           "interval": "",
           "legendFormat": "ssr",
           "refId": "A"
@@ -648,7 +654,9 @@
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -659,7 +667,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "pm2_process_restarts{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"default\"}",
+          "expr": "pm2_process_restarts{name=\"default\"}",
           "instant": true,
           "interval": "",
           "legendFormat": "default",
@@ -667,7 +675,7 @@
         },
         {
           "exemplar": true,
-          "expr": "pm2_process_restarts{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"blue\"}",
+          "expr": "pm2_process_restarts{name=\"blue\"}",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -676,7 +684,7 @@
         },
         {
           "exemplar": true,
-          "expr": "pm2_process_restarts{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"distributor\"}",
+          "expr": "pm2_process_restarts{name=\"distributor\"}",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -685,7 +693,7 @@
         },
         {
           "exemplar": true,
-          "expr": "pm2_process_restarts{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"prometheus\"}",
+          "expr": "pm2_process_restarts{name=\"prometheus\"}",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -770,7 +778,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(increase(http_request_status_code_counts{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", status_code=~\"[4-5][0-9][0-9]\"}[2m]))",
+          "expr": "sum(increase(http_request_status_code_counts{status_code=~\"[4-5][0-9][0-9]\"}[2m]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -818,7 +826,9 @@
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -909,14 +919,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "increase(pm2_process_restarts{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"default\"}[2m])",
+          "expr": "increase(pm2_process_restarts{name=\"default\"}[2m])",
           "interval": "",
           "legendFormat": "default",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "increase(pm2_process_restarts{app_kubernetes_io_name=\"pwa-main\", job=\"kubernetes-service-endpoints\", name=\"blue\"}[2m])",
+          "expr": "increase(pm2_process_restarts{name=\"blue\"}[2m])",
           "hide": false,
           "interval": "",
           "legendFormat": "blue",
@@ -1003,7 +1013,9 @@
         "justifyMode": "center",
         "orientation": "auto",
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
@@ -1046,6 +1058,182 @@
       ],
       "title": "Process: Blue",
       "type": "stat"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 41
+      },
+      "id": 27,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(pm2_process_memory_array_buffers{name=\"default\"})/sum(pm2_processes{name=\"default\"})",
+          "interval": "",
+          "legendFormat": "array buffers",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(pm2_process_memory_external{name=\"default\"})/sum(pm2_processes{name=\"default\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "external",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(pm2_process_memory_heap_used{name=\"default\"})/sum(pm2_processes{name=\"default\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "heap used",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(pm2_process_memory_heap_total{name=\"default\"})/sum(pm2_processes{name=\"default\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "heap total",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(pm2_process_memory_rss{name=\"default\"})/sum(pm2_processes{name=\"default\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "rss",
+          "refId": "E"
+        }
+      ],
+      "title": "Memory Statistics for Default",
+      "type": "stat"
+    },
+    {
+      "datasource": null,
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
+          "unit": "decbytes"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 41
+      },
+      "id": 29,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "text": {},
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.0.5",
+      "targets": [
+        {
+          "exemplar": true,
+          "expr": "sum(pm2_process_memory_array_buffers{name=\"blue\"})/sum(pm2_processes{name=\"blue\"})",
+          "interval": "",
+          "legendFormat": "array buffers",
+          "refId": "A"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(pm2_process_memory_external{name=\"blue\"})/sum(pm2_processes{name=\"blue\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "external",
+          "refId": "B"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(pm2_process_memory_heap_used{name=\"blue\"})/sum(pm2_processes{name=\"blue\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "heap used",
+          "refId": "C"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(pm2_process_memory_heap_total{name=\"blue\"})/sum(pm2_processes{name=\"blue\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "heap total",
+          "refId": "D"
+        },
+        {
+          "exemplar": true,
+          "expr": "sum(pm2_process_memory_rss{name=\"blue\"})/sum(pm2_processes{name=\"blue\"})",
+          "hide": false,
+          "interval": "",
+          "legendFormat": "rss",
+          "refId": "E"
+        }
+      ],
+      "title": "Memory Statistics for Blue",
+      "type": "stat"
     }
   ],
   "refresh": "5s",
@@ -1062,6 +1250,6 @@
   "timepicker": {},
   "timezone": "",
   "title": "PWA",
-  "uid": "D_cLEuZ7z",
-  "version": 10
+  "uid": "uBEReeM7k",
+  "version": 2
 }
