@@ -94,17 +94,17 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg(pm2_process_cpu{kubernetes_namespace=\"default\", name=\"default\"})/100",
+          "expr": "avg(pm2_process_cpu{kubernetes_namespace=\"$namespace\", name=\"$theme_1\"})/100",
           "interval": "",
-          "legendFormat": "default",
+          "legendFormat": "$theme_1",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "avg(pm2_process_cpu{kubernetes_namespace=\"default\", name=\"blue\"})/100",
+          "expr": "avg(pm2_process_cpu{kubernetes_namespace=\"$namespace\", name=\"$theme_2\"})/100",
           "hide": false,
           "interval": "",
-          "legendFormat": "blue",
+          "legendFormat": "$theme_2",
           "refId": "B"
         }
       ],
@@ -184,17 +184,17 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg(pm2_process_memory{kubernetes_namespace=\"default\", name=\"default\"})",
+          "expr": "avg(pm2_process_memory{kubernetes_namespace=\"$namespace\", name=\"$theme_1\"})",
           "interval": "",
-          "legendFormat": "default",
+          "legendFormat": "$theme_1",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "avg(pm2_process_memory{kubernetes_namespace=\"default\", name=\"blue\"})",
+          "expr": "avg(pm2_process_memory{kubernetes_namespace=\"$namespace\", name=\"$theme_2\"})",
           "hide": false,
           "interval": "",
-          "legendFormat": "blue",
+          "legendFormat": "$theme_2",
           "refId": "B"
         }
       ],
@@ -248,21 +248,21 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "pm2_processes{kubernetes_namespace=\"default\", name=\"default\"}",
+          "expr": "pm2_processes{kubernetes_namespace=\"$namespace\", name=\"$theme_1\"}",
           "format": "time_series",
           "instant": true,
           "interval": "",
           "intervalFactor": 1,
-          "legendFormat": "default",
+          "legendFormat": "$theme_1",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "pm2_processes{kubernetes_namespace=\"default\", name=\"blue\"}",
+          "expr": "pm2_processes{kubernetes_namespace=\"$namespace\", name=\"$theme_2\"}",
           "hide": false,
           "instant": true,
           "interval": "",
-          "legendFormat": "blue",
+          "legendFormat": "$theme_2",
           "refId": "B"
         }
       ],
@@ -318,24 +318,24 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg(pm2_process_memory{kubernetes_namespace=\"default\", name=\"default\"})",
+          "expr": "avg(pm2_process_memory{kubernetes_namespace=\"$namespace\", name=\"$theme_1\"})",
           "instant": true,
           "interval": "",
-          "legendFormat": "default",
+          "legendFormat": "$theme_1",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "avg(pm2_process_memory{kubernetes_namespace=\"default\", name=\"blue\"})",
+          "expr": "avg(pm2_process_memory{kubernetes_namespace=\"$namespace\", name=\"$theme_2\"})",
           "hide": false,
           "instant": true,
           "interval": "",
-          "legendFormat": "blue",
+          "legendFormat": "$theme_2",
           "refId": "B"
         },
         {
           "exemplar": true,
-          "expr": "avg(pm2_process_memory{kubernetes_namespace=\"default\", name=\"distributor\"})",
+          "expr": "avg(pm2_process_memory{kubernetes_namespace=\"$namespace\", name=\"distributor\"})",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -344,7 +344,7 @@
         },
         {
           "exemplar": true,
-          "expr": "avg(pm2_process_memory{kubernetes_namespace=\"default\", name=\"prometheus\"})",
+          "expr": "avg(pm2_process_memory{kubernetes_namespace=\"$namespace\", name=\"prometheus\"})",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -432,7 +432,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(increase(http_request_status_code_counts{kubernetes_namespace=\"default\"}[2m]))",
+          "expr": "sum(increase(http_request_status_code_counts{kubernetes_namespace=\"$namespace\"}[2m]))",
           "instant": false,
           "interval": "",
           "legendFormat": "ssr",
@@ -495,24 +495,24 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg(pm2_process_cpu{kubernetes_namespace=\"default\", name=\"default\"})/100",
+          "expr": "avg(pm2_process_cpu{kubernetes_namespace=\"$namespace\", name=\"$theme_1\"})/100",
           "instant": true,
           "interval": "",
-          "legendFormat": "default",
+          "legendFormat": "$theme_1",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "avg(pm2_process_cpu{kubernetes_namespace=\"default\", name=\"blue\"})/100",
+          "expr": "avg(pm2_process_cpu{kubernetes_namespace=\"$namespace\", name=\"$theme_2\"})/100",
           "hide": false,
           "instant": true,
           "interval": "",
-          "legendFormat": "blue",
+          "legendFormat": "$theme_2",
           "refId": "B"
         },
         {
           "exemplar": true,
-          "expr": "avg(pm2_process_cpu{kubernetes_namespace=\"default\", name=\"distributor\"})/100",
+          "expr": "avg(pm2_process_cpu{kubernetes_namespace=\"$namespace\", name=\"distributor\"})/100",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -521,7 +521,7 @@
         },
         {
           "exemplar": true,
-          "expr": "avg(pm2_process_cpu{kubernetes_namespace=\"default\", name=\"prometheus\"})/100",
+          "expr": "avg(pm2_process_cpu{kubernetes_namespace=\"$namespace\", name=\"prometheus\"})/100",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -606,7 +606,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{kubernetes_namespace=\"default\"}[5m])) by (le))",
+          "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{kubernetes_namespace=\"$namespace\"}[5m])) by (le))",
           "interval": "",
           "legendFormat": "ssr",
           "refId": "A"
@@ -667,24 +667,24 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_restarts{kubernetes_namespace=\"default\", name=\"default\"})",
+          "expr": "sum(pm2_process_restarts{kubernetes_namespace=\"$namespace\", name=\"$theme_1\"})",
           "instant": true,
           "interval": "",
-          "legendFormat": "default",
+          "legendFormat": "$theme_1",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_restarts{kubernetes_namespace=\"default\", name=\"blue\"})",
+          "expr": "sum(pm2_process_restarts{kubernetes_namespace=\"$namespace\", name=\"$theme_2\"})",
           "hide": false,
           "instant": true,
           "interval": "",
-          "legendFormat": "blue",
+          "legendFormat": "$theme_2",
           "refId": "B"
         },
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_restarts{kubernetes_namespace=\"default\", name=\"distributor\"})",
+          "expr": "sum(pm2_process_restarts{kubernetes_namespace=\"$namespace\", name=\"distributor\"})",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -693,7 +693,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_restarts{kubernetes_namespace=\"default\", name=\"prometheus\"})",
+          "expr": "sum(pm2_process_restarts{kubernetes_namespace=\"$namespace\", name=\"prometheus\"})",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -778,7 +778,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(increase(http_request_status_code_counts{kubernetes_namespace=\"default\", status_code=~\"[4-5][0-9][0-9]\"}[2m]))",
+          "expr": "sum(increase(http_request_status_code_counts{kubernetes_namespace=\"$namespace\", status_code=~\"[4-5][0-9][0-9]\"}[2m]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -839,7 +839,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_status_online{kubernetes_namespace=\"default\", name=\"default\"})",
+          "expr": "sum(pm2_process_status_online{kubernetes_namespace=\"$namespace\", name=\"$theme_1\"})",
           "instant": false,
           "interval": "",
           "legendFormat": "online",
@@ -847,7 +847,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_status_launching{kubernetes_namespace=\"default\", name=\"default\"})",
+          "expr": "sum(pm2_process_status_launching{kubernetes_namespace=\"$namespace\", name=\"$theme_1\"})",
           "hide": false,
           "instant": false,
           "interval": "",
@@ -856,7 +856,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_status_stopped{kubernetes_namespace=\"default\", name=\"default\"})",
+          "expr": "sum(pm2_process_status_stopped{kubernetes_namespace=\"$namespace\", name=\"$theme_1\"})",
           "hide": false,
           "instant": false,
           "interval": "",
@@ -865,7 +865,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_status_errored{kubernetes_namespace=\"default\", name=\"default\"})",
+          "expr": "sum(pm2_process_status_errored{kubernetes_namespace=\"$namespace\", name=\"$theme_1\"})",
           "hide": false,
           "instant": false,
           "interval": "",
@@ -873,7 +873,7 @@
           "refId": "D"
         }
       ],
-      "title": "Process: Default",
+      "title": "Process status for $theme_1",
       "type": "stat"
     },
     {
@@ -919,17 +919,17 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(increase(pm2_process_restarts{kubernetes_namespace=\"default\", name=\"default\"}[5m]))",
+          "expr": "sum(increase(pm2_process_restarts{kubernetes_namespace=\"$namespace\", name=\"$theme_1\"}[5m]))",
           "interval": "",
-          "legendFormat": "default",
+          "legendFormat": "$theme_1",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "sum(increase(pm2_process_restarts{kubernetes_namespace=\"default\", name=\"blue\"}[5m]))",
+          "expr": "sum(increase(pm2_process_restarts{kubernetes_namespace=\"$namespace\", name=\"$theme_2\"}[5m]))",
           "hide": false,
           "interval": "",
-          "legendFormat": "blue",
+          "legendFormat": "$theme_2",
           "refId": "B"
         }
       ],
@@ -1026,14 +1026,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_status_online{kubernetes_namespace=\"default\", name=\"blue\"})",
+          "expr": "sum(pm2_process_status_online{kubernetes_namespace=\"$namespace\", name=\"$theme_2\"})",
           "interval": "",
           "legendFormat": "online",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_status_launching{kubernetes_namespace=\"default\", name=\"blue\"})",
+          "expr": "sum(pm2_process_status_launching{kubernetes_namespace=\"$namespace\", name=\"$theme_2\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "launching",
@@ -1041,7 +1041,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_status_stopped{kubernetes_namespace=\"default\", name=\"blue\"})",
+          "expr": "sum(pm2_process_status_stopped{kubernetes_namespace=\"$namespace\", name=\"$theme_2\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "stopped",
@@ -1049,14 +1049,14 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_status_errored{kubernetes_namespace=\"default\", name=\"blue\"})",
+          "expr": "sum(pm2_process_status_errored{kubernetes_namespace=\"$namespace\", name=\"$theme_2\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "errored",
           "refId": "D"
         }
       ],
-      "title": "Process: Blue",
+      "title": "Process status for $theme_2",
       "type": "stat"
     },
     {
@@ -1106,14 +1106,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg(pm2_process_memory_array_buffers{kubernetes_namespace=\"default\", name=\"default\"})",
+          "expr": "avg(pm2_process_memory_array_buffers{kubernetes_namespace=\"$namespace\", name=\"$theme_1\"})",
           "interval": "",
           "legendFormat": "array buffers",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "avg(pm2_process_memory_external{kubernetes_namespace=\"default\", name=\"default\"})",
+          "expr": "avg(pm2_process_memory_external{kubernetes_namespace=\"$namespace\", name=\"$theme_1\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "external",
@@ -1121,7 +1121,7 @@
         },
         {
           "exemplar": true,
-          "expr": "avg(pm2_process_memory_heap_used{kubernetes_namespace=\"default\", name=\"default\"})",
+          "expr": "avg(pm2_process_memory_heap_used{kubernetes_namespace=\"$namespace\", name=\"$theme_1\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "heap used",
@@ -1129,7 +1129,7 @@
         },
         {
           "exemplar": true,
-          "expr": "avg(pm2_process_memory_heap_total{kubernetes_namespace=\"default\", name=\"default\"})",
+          "expr": "avg(pm2_process_memory_heap_total{kubernetes_namespace=\"$namespace\", name=\"$theme_1\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "heap total",
@@ -1137,18 +1137,19 @@
         },
         {
           "exemplar": true,
-          "expr": "avg(pm2_process_memory_rss{kubernetes_namespace=\"default\", name=\"default\"})",
+          "expr": "avg(pm2_process_memory_rss{kubernetes_namespace=\"$namespace\", name=\"$theme_1\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "rss",
           "refId": "E"
         }
       ],
-      "title": "Memory Statistics for Default",
+      "title": "Memory Statistics for $theme_1",
       "type": "stat"
     },
     {
       "datasource": null,
+      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -1194,14 +1195,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "avg(pm2_process_memory_array_buffers{kubernetes_namespace=\"default\", name=\"blue\"})",
+          "expr": "avg(pm2_process_memory_array_buffers{kubernetes_namespace=\"$namespace\", name=\"$theme_2\"})",
           "interval": "",
           "legendFormat": "array buffers",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "avg(pm2_process_memory_external{kubernetes_namespace=\"default\", name=\"blue\"})",
+          "expr": "avg(pm2_process_memory_external{kubernetes_namespace=\"$namespace\", name=\"$theme_2\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "external",
@@ -1209,7 +1210,7 @@
         },
         {
           "exemplar": true,
-          "expr": "avg(pm2_process_memory_heap_used{kubernetes_namespace=\"default\", name=\"blue\"})",
+          "expr": "avg(pm2_process_memory_heap_used{kubernetes_namespace=\"$namespace\", name=\"$theme_2\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "heap used",
@@ -1217,7 +1218,7 @@
         },
         {
           "exemplar": true,
-          "expr": "avg(pm2_process_memory_heap_total{kubernetes_namespace=\"default\", name=\"blue\"})",
+          "expr": "avg(pm2_process_memory_heap_total{kubernetes_namespace=\"$namespace\", name=\"$theme_2\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "heap total",
@@ -1225,14 +1226,14 @@
         },
         {
           "exemplar": true,
-          "expr": "avg(pm2_process_memory_rss{kubernetes_namespace=\"default\", name=\"blue\"})",
+          "expr": "avg(pm2_process_memory_rss{kubernetes_namespace=\"$namespace\", name=\"$theme_2\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "rss",
           "refId": "E"
         }
       ],
-      "title": "Memory Statistics for Blue",
+      "title": "Memory Statistics for $theme_2",
       "type": "stat"
     }
   ],
@@ -1241,15 +1242,46 @@
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "description": null,
+        "error": null,
+        "hide": 2,
+        "label": null,
+        "name": "namespace",
+        "query": "default",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "description": null,
+        "error": null,
+        "hide": 2,
+        "label": null,
+        "name": "theme_1",
+        "query": "default",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "description": null,
+        "error": null,
+        "hide": 2,
+        "label": null,
+        "name": "theme_2",
+        "query": "blue",
+        "skipUrlSync": false,
+        "type": "constant"
+      }
+    ]
   },
   "time": {
-    "from": "now-30m",
+    "from": "now-15m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "PWA",
   "uid": "kdYnMi7nk",
-  "version": 4
+  "version": 6
 }
