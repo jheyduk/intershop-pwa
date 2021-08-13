@@ -667,7 +667,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "pm2_process_restarts{kubernetes_namespace=\"default\", name=\"default\"}",
+          "expr": "sum(pm2_process_restarts{kubernetes_namespace=\"default\", name=\"default\"})",
           "instant": true,
           "interval": "",
           "legendFormat": "default",
@@ -675,7 +675,7 @@
         },
         {
           "exemplar": true,
-          "expr": "pm2_process_restarts{kubernetes_namespace=\"default\", name=\"blue\"}",
+          "expr": "sum(pm2_process_restarts{kubernetes_namespace=\"default\", name=\"blue\"})",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -684,7 +684,7 @@
         },
         {
           "exemplar": true,
-          "expr": "pm2_process_restarts{kubernetes_namespace=\"default\", name=\"distributor\"}",
+          "expr": "sum(pm2_process_restarts{kubernetes_namespace=\"default\", name=\"distributor\"})",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -693,7 +693,7 @@
         },
         {
           "exemplar": true,
-          "expr": "pm2_process_restarts{kubernetes_namespace=\"default\", name=\"prometheus\"}",
+          "expr": "sum(pm2_process_restarts{kubernetes_namespace=\"default\", name=\"prometheus\"})",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -919,14 +919,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "increase(pm2_process_restarts{kubernetes_namespace=\"default\", name=\"default\"}[2m])",
+          "expr": "sum(increase(pm2_process_restarts{kubernetes_namespace=\"default\", name=\"default\"}[5m]))",
           "interval": "",
           "legendFormat": "default",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "increase(pm2_process_restarts{kubernetes_namespace=\"default\", name=\"blue\"}[2m])",
+          "expr": "sum(increase(pm2_process_restarts{kubernetes_namespace=\"default\", name=\"blue\"}[5m]))",
           "hide": false,
           "interval": "",
           "legendFormat": "blue",
@@ -1251,5 +1251,5 @@
   "timezone": "",
   "title": "PWA",
   "uid": "kdYnMi7nk",
-  "version": 2
+  "version": 4
 }

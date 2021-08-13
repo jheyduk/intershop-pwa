@@ -41,11 +41,6 @@ const pm2Processes = new client.Gauge({
   help: 'counter for pm2 processes',
   labelNames: ['name'],
 });
-const pm2ProcessRestarts = new client.Gauge({
-  name: 'pm2_process_restarts',
-  help: 'counter for pm2 process restarts',
-  labelNames: ['name'],
-});
 
 const pm2ProcessUptime = new client.Gauge({
   name: 'pm2_process_uptime',
@@ -59,9 +54,9 @@ const pm2ProcessCreated = new client.Gauge({
   labelNames: ['name', 'pid'],
 });
 
-const pm2ProcessRestartTime = new client.Gauge({
-  name: 'pm2_process_restart_time',
-  help: 'restart time for pm2 processes',
+const pm2ProcessRestarts = new client.Gauge({
+  name: 'pm2_process_restarts',
+  help: 'restarts of pm2 process',
   labelNames: ['name', 'pid'],
 });
 
@@ -170,6 +165,7 @@ app.get('/metrics', async (_, res) => {
     if (!err1) {
       pm2.list((err2, list) => {
         if (!err2) {
+          console.log(list);
           Object.entries(ports).map(([theme]) =>
             list
               .filter(item => item.name === theme)
@@ -214,14 +210,6 @@ app.get('/metrics', async (_, res) => {
             pm2ProcessStatusErrored.labels({ name }).set(0);
           });
 
-          const pm2Restarts = list.reduce(
-            (acc, p) => ({ ...acc, [p.name]: (acc[p.name] || 0) + p.pm2_env.restart_time || 0 }),
-            {}
-          );
-          Object.entries(pm2Restarts).forEach(([name, value]) => {
-            pm2ProcessRestarts.labels({ name }).set(value);
-          });
-
           const pm2ProcessDetails = list.reduce(
             (acc, p) => ({
               ...acc,
@@ -242,7 +230,7 @@ app.get('/metrics', async (_, res) => {
           Object.entries(pm2ProcessDetails).forEach(([pid, value]) => {
             pm2ProcessUptime.labels({ name: value.name, pid }).set(value.uptime);
             pm2ProcessCreated.labels({ name: value.name, pid }).set(value.created);
-            pm2ProcessRestartTime.labels({ name: value.name, pid }).set(value.restart_time);
+            pm2ProcessRestarts.labels({ name: value.name, pid }).set(value.restart_time);
             pm2ProcessUnstableRestarts.labels({ name: value.name, pid }).set(value.unstable_restarts);
             pm2ProcessMemory.labels({ name: value.name, pid }).set(value.memory);
             pm2ProcessCPU.labels({ name: value.name, pid }).set(value.cpu);
