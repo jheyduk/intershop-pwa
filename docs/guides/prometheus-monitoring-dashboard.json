@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 1,
+  "id": 3,
   "links": [],
   "panels": [
     {
@@ -94,14 +94,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "pm2_cpu{name=\"default\"}/pm2_processes{name=\"default\"}",
+          "expr": "avg(pm2_process_cpu{kubernetes_namespace=\"default\", name=\"default\"})/100",
           "interval": "",
           "legendFormat": "default",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "pm2_cpu{name=\"blue\"}/pm2_processes{name=\"blue\"}",
+          "expr": "avg(pm2_process_cpu{kubernetes_namespace=\"default\", name=\"blue\"})/100",
           "hide": false,
           "interval": "",
           "legendFormat": "blue",
@@ -184,14 +184,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "pm2_memory{name=\"default\"}/pm2_processes{name=\"default\"}",
+          "expr": "avg(pm2_process_memory{kubernetes_namespace=\"default\", name=\"default\"})",
           "interval": "",
           "legendFormat": "default",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "pm2_memory{name=\"blue\"}/pm2_processes{name=\"blue\"}",
+          "expr": "avg(pm2_process_memory{kubernetes_namespace=\"default\", name=\"blue\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "blue",
@@ -248,7 +248,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "pm2_processes{name=\"default\"}",
+          "expr": "pm2_processes{kubernetes_namespace=\"default\", name=\"default\"}",
           "format": "time_series",
           "instant": true,
           "interval": "",
@@ -258,7 +258,7 @@
         },
         {
           "exemplar": true,
-          "expr": "pm2_processes{name=\"blue\"}",
+          "expr": "pm2_processes{kubernetes_namespace=\"default\", name=\"blue\"}",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -318,7 +318,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "pm2_memory{name=\"default\"}/pm2_processes{name=\"default\"}",
+          "expr": "avg(pm2_process_memory{kubernetes_namespace=\"default\", name=\"default\"})",
           "instant": true,
           "interval": "",
           "legendFormat": "default",
@@ -326,7 +326,7 @@
         },
         {
           "exemplar": true,
-          "expr": "pm2_memory{name=\"blue\"}/pm2_processes{name=\"blue\"}",
+          "expr": "avg(pm2_process_memory{kubernetes_namespace=\"default\", name=\"blue\"})",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -335,7 +335,7 @@
         },
         {
           "exemplar": true,
-          "expr": "pm2_memory{name=\"distributor\"}/pm2_processes{name=\"distributor\"}",
+          "expr": "avg(pm2_process_memory{kubernetes_namespace=\"default\", name=\"distributor\"})",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -344,7 +344,7 @@
         },
         {
           "exemplar": true,
-          "expr": "pm2_memory{name=\"prometheus\"}/pm2_processes{name=\"prometheus\"}",
+          "expr": "avg(pm2_process_memory{kubernetes_namespace=\"default\", name=\"prometheus\"})",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -432,7 +432,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(increase(http_request_status_code_counts{}[2m]))",
+          "expr": "sum(increase(http_request_status_code_counts{kubernetes_namespace=\"default\"}[2m]))",
           "instant": false,
           "interval": "",
           "legendFormat": "ssr",
@@ -495,7 +495,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "pm2_cpu{name=\"default\"}/pm2_processes{name=\"default\"}",
+          "expr": "avg(pm2_process_cpu{kubernetes_namespace=\"default\", name=\"default\"})/100",
           "instant": true,
           "interval": "",
           "legendFormat": "default",
@@ -503,7 +503,7 @@
         },
         {
           "exemplar": true,
-          "expr": "pm2_cpu{name=\"blue\"}/pm2_processes{name=\"blue\"}",
+          "expr": "avg(pm2_process_cpu{kubernetes_namespace=\"default\", name=\"blue\"})/100",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -512,7 +512,7 @@
         },
         {
           "exemplar": true,
-          "expr": "pm2_cpu{name=\"distributor\"}/pm2_processes{name=\"distributor\"}",
+          "expr": "avg(pm2_process_cpu{kubernetes_namespace=\"default\", name=\"distributor\"})/100",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -521,7 +521,7 @@
         },
         {
           "exemplar": true,
-          "expr": "pm2_cpu{name=\"prometheus\"}/pm2_processes{name=\"prometheus\"}",
+          "expr": "avg(pm2_process_cpu{kubernetes_namespace=\"default\", name=\"prometheus\"})/100",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -606,7 +606,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{}[5m])) by (le))",
+          "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket{kubernetes_namespace=\"default\"}[5m])) by (le))",
           "interval": "",
           "legendFormat": "ssr",
           "refId": "A"
@@ -667,7 +667,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "pm2_process_restarts{name=\"default\"}",
+          "expr": "pm2_process_restarts{kubernetes_namespace=\"default\", name=\"default\"}",
           "instant": true,
           "interval": "",
           "legendFormat": "default",
@@ -675,7 +675,7 @@
         },
         {
           "exemplar": true,
-          "expr": "pm2_process_restarts{name=\"blue\"}",
+          "expr": "pm2_process_restarts{kubernetes_namespace=\"default\", name=\"blue\"}",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -684,7 +684,7 @@
         },
         {
           "exemplar": true,
-          "expr": "pm2_process_restarts{name=\"distributor\"}",
+          "expr": "pm2_process_restarts{kubernetes_namespace=\"default\", name=\"distributor\"}",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -693,7 +693,7 @@
         },
         {
           "exemplar": true,
-          "expr": "pm2_process_restarts{name=\"prometheus\"}",
+          "expr": "pm2_process_restarts{kubernetes_namespace=\"default\", name=\"prometheus\"}",
           "hide": false,
           "instant": true,
           "interval": "",
@@ -778,7 +778,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(increase(http_request_status_code_counts{status_code=~\"[4-5][0-9][0-9]\"}[2m]))",
+          "expr": "sum(increase(http_request_status_code_counts{kubernetes_namespace=\"default\", status_code=~\"[4-5][0-9][0-9]\"}[2m]))",
           "interval": "",
           "legendFormat": "",
           "refId": "A"
@@ -839,7 +839,7 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_status_online{name=\"default\"})",
+          "expr": "sum(pm2_process_status_online{kubernetes_namespace=\"default\", name=\"default\"})",
           "instant": false,
           "interval": "",
           "legendFormat": "online",
@@ -847,7 +847,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_status_launching{name=\"default\"})",
+          "expr": "sum(pm2_process_status_launching{kubernetes_namespace=\"default\", name=\"default\"})",
           "hide": false,
           "instant": false,
           "interval": "",
@@ -856,7 +856,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_status_stopped{name=\"default\"})",
+          "expr": "sum(pm2_process_status_stopped{kubernetes_namespace=\"default\", name=\"default\"})",
           "hide": false,
           "instant": false,
           "interval": "",
@@ -865,7 +865,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_status_errored{name=\"default\"})",
+          "expr": "sum(pm2_process_status_errored{kubernetes_namespace=\"default\", name=\"default\"})",
           "hide": false,
           "instant": false,
           "interval": "",
@@ -919,14 +919,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "increase(pm2_process_restarts{name=\"default\"}[2m])",
+          "expr": "increase(pm2_process_restarts{kubernetes_namespace=\"default\", name=\"default\"}[2m])",
           "interval": "",
           "legendFormat": "default",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "increase(pm2_process_restarts{name=\"blue\"}[2m])",
+          "expr": "increase(pm2_process_restarts{kubernetes_namespace=\"default\", name=\"blue\"}[2m])",
           "hide": false,
           "interval": "",
           "legendFormat": "blue",
@@ -1026,14 +1026,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_status_online{name=\"blue\"})",
+          "expr": "sum(pm2_process_status_online{kubernetes_namespace=\"default\", name=\"blue\"})",
           "interval": "",
           "legendFormat": "online",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_status_launching{name=\"blue\"})",
+          "expr": "sum(pm2_process_status_launching{kubernetes_namespace=\"default\", name=\"blue\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "launching",
@@ -1041,7 +1041,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_status_stopped{name=\"blue\"})",
+          "expr": "sum(pm2_process_status_stopped{kubernetes_namespace=\"default\", name=\"blue\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "stopped",
@@ -1049,7 +1049,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_status_errored{name=\"blue\"})",
+          "expr": "sum(pm2_process_status_errored{kubernetes_namespace=\"default\", name=\"blue\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "errored",
@@ -1106,14 +1106,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_memory_array_buffers{name=\"default\"})/sum(pm2_processes{name=\"default\"})",
+          "expr": "avg(pm2_process_memory_array_buffers{kubernetes_namespace=\"default\", name=\"default\"})",
           "interval": "",
           "legendFormat": "array buffers",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_memory_external{name=\"default\"})/sum(pm2_processes{name=\"default\"})",
+          "expr": "avg(pm2_process_memory_external{kubernetes_namespace=\"default\", name=\"default\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "external",
@@ -1121,7 +1121,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_memory_heap_used{name=\"default\"})/sum(pm2_processes{name=\"default\"})",
+          "expr": "avg(pm2_process_memory_heap_used{kubernetes_namespace=\"default\", name=\"default\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "heap used",
@@ -1129,7 +1129,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_memory_heap_total{name=\"default\"})/sum(pm2_processes{name=\"default\"})",
+          "expr": "avg(pm2_process_memory_heap_total{kubernetes_namespace=\"default\", name=\"default\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "heap total",
@@ -1137,7 +1137,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_memory_rss{name=\"default\"})/sum(pm2_processes{name=\"default\"})",
+          "expr": "avg(pm2_process_memory_rss{kubernetes_namespace=\"default\", name=\"default\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "rss",
@@ -1194,14 +1194,14 @@
       "targets": [
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_memory_array_buffers{name=\"blue\"})/sum(pm2_processes{name=\"blue\"})",
+          "expr": "avg(pm2_process_memory_array_buffers{kubernetes_namespace=\"default\", name=\"blue\"})",
           "interval": "",
           "legendFormat": "array buffers",
           "refId": "A"
         },
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_memory_external{name=\"blue\"})/sum(pm2_processes{name=\"blue\"})",
+          "expr": "avg(pm2_process_memory_external{kubernetes_namespace=\"default\", name=\"blue\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "external",
@@ -1209,7 +1209,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_memory_heap_used{name=\"blue\"})/sum(pm2_processes{name=\"blue\"})",
+          "expr": "avg(pm2_process_memory_heap_used{kubernetes_namespace=\"default\", name=\"blue\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "heap used",
@@ -1217,7 +1217,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_memory_heap_total{name=\"blue\"})/sum(pm2_processes{name=\"blue\"})",
+          "expr": "avg(pm2_process_memory_heap_total{kubernetes_namespace=\"default\", name=\"blue\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "heap total",
@@ -1225,7 +1225,7 @@
         },
         {
           "exemplar": true,
-          "expr": "sum(pm2_process_memory_rss{name=\"blue\"})/sum(pm2_processes{name=\"blue\"})",
+          "expr": "avg(pm2_process_memory_rss{kubernetes_namespace=\"default\", name=\"blue\"})",
           "hide": false,
           "interval": "",
           "legendFormat": "rss",
@@ -1250,6 +1250,6 @@
   "timepicker": {},
   "timezone": "",
   "title": "PWA",
-  "uid": "uBEReeM7k",
+  "uid": "kdYnMi7nk",
   "version": 2
 }

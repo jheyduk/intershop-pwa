@@ -46,36 +46,6 @@ const pm2ProcessRestarts = new client.Gauge({
   help: 'counter for pm2 process restarts',
   labelNames: ['name'],
 });
-const pm2Memory = new client.Gauge({
-  name: 'pm2_memory',
-  help: 'counter for pm2 memory',
-  labelNames: ['name'],
-});
-
-const pm2CPUHistogram = new client.Histogram({
-  name: 'pm2_cpu_histogram',
-  help: 'average cpu usage histogram for pm2 processes',
-  buckets: [0.01, 0.03, 0.05, 0.07, 0.09, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
-  labelNames: ['name'],
-});
-
-const pm2AverageCPU = new client.Gauge({
-  name: 'pm2_cpu',
-  help: 'average cpu usage for pm2 processes',
-  labelNames: ['name'],
-});
-
-const pm2StatusCount = new client.Gauge({
-  name: 'pm2_status_count',
-  help: 'counted status of pm2 processes',
-  labelNames: ['name'],
-});
-
-const pm2UnstableRestarts = new client.Gauge({
-  name: 'pm2_unstable_restarts',
-  help: 'counter for unstable restarts of pm2 processes',
-  labelNames: ['name'],
-});
 
 const pm2ProcessUptime = new client.Gauge({
   name: 'pm2_process_uptime',
@@ -200,8 +170,6 @@ app.get('/metrics', async (_, res) => {
     if (!err1) {
       pm2.list((err2, list) => {
         if (!err2) {
-          console.log(list);
-
           Object.entries(ports).map(([theme]) =>
             list
               .filter(item => item.name === theme)
@@ -245,47 +213,13 @@ app.get('/metrics', async (_, res) => {
             pm2ProcessStatusStopped.labels({ name }).set(0);
             pm2ProcessStatusErrored.labels({ name }).set(0);
           });
-          const pm2ProcessMemoryCounts = list.reduce(
-            (acc, p) => ({ ...acc, [p.name]: (acc[p.name] || 0) + p.monit?.memory || 0 }),
-            {}
-          );
-          Object.entries(pm2ProcessMemoryCounts).forEach(([name, value]) => {
-            pm2Memory.labels({ name }).set(value);
-          });
+
           const pm2Restarts = list.reduce(
             (acc, p) => ({ ...acc, [p.name]: (acc[p.name] || 0) + p.pm2_env.restart_time || 0 }),
             {}
           );
           Object.entries(pm2Restarts).forEach(([name, value]) => {
             pm2ProcessRestarts.labels({ name }).set(value);
-          });
-
-          const pm2CPUs = list.reduce(
-            (acc, p) => ({
-              ...acc,
-              [p.name]: { sum: (acc[p.name]?.sum || 0) + p.monit.cpu, count: (acc[p.name]?.count || 0) + 1 },
-            }),
-            {}
-          );
-          Object.entries(pm2CPUs).forEach(([name, value]) => {
-            pm2CPUHistogram.labels({ name }).observe(value.sum / (value.count * 100));
-            pm2AverageCPU.labels({ name }).set(value.sum / (value.count * 100));
-          });
-
-          const pm2StatusCounts = list.reduce(
-            (acc, p) => ({ ...acc, [p.pm2_env.status]: (acc[p.pm2_env.status] || 0) + 1 }),
-            {}
-          );
-          Object.entries(pm2StatusCounts).forEach(([name, value]) => {
-            pm2StatusCount.labels({ name }).set(value);
-          });
-
-          const pm2UnstableRestartsCounts = list.reduce(
-            (acc, p) => ({ ...acc, [p.name]: (acc[p.name] || 0) + p.pm2_env.unstable_restarts }),
-            {}
-          );
-          Object.entries(pm2UnstableRestartsCounts).forEach(([name, value]) => {
-            pm2UnstableRestarts.labels({ name }).set(value);
           });
 
           const pm2ProcessDetails = list.reduce(
