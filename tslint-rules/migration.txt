@@ -1,54 +1,60 @@
       Custom:
-      - ban-specific-imports
-      - component-creation-test
-      - do-not-use-then-with-testbed-in-tests
-      - force-jsdoc-comments
-      - initialize-observables-in-ngoninit
-      - ish-no-object-literal-type-assertion
-      - ish-ordered-imports
-      - ish-useful-imports
-      - lifecycle-cyclomatic-complexity
-      - meaningful-naming-in-tests
-      - newline-before-root-members
-      - ng-module-sorted-fields
-      - ngrx-use-empty-store-type
-      - no-assignment-to-inputs
-      - no-commented-out-tests
-      - no-disabled-tests
+      - ban-specific-imports                        <- https://eslint.org/docs/rules/no-restricted-imports
+      - ish-no-object-literal-type-assertion        <- https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/consistent-type-assertions.md disable for tests
+      - ish-ordered-imports                         <- https://eslint.org/docs/rules/sort-imports
+      - meaningful-naming-in-tests                  <- https://github.com/jest-community/eslint-plugin-jest/blob/HEAD/docs/rules/valid-title.md with mustMatch
+      - ng-module-sorted-fields                     <- https://github.com/angular-eslint/angular-eslint/blob/master/packages/eslint-plugin/src/rules/sort-ngmodule-metadata-arrays.ts
+      - no-commented-out-tests                      <- https://www.npmjs.com/package/eslint-plugin-jest
+      - no-disabled-tests                           <- https://www.npmjs.com/package/eslint-plugin-jest
       - no-focused-tests                            <- https://www.npmjs.com/package/eslint-plugin-jest
-      - no-intelligence-in-artifacts
-      - no-star-imports-in-store
-      - no-suspicious-variable-init-in-tests
-      - private-destroy-field
-      - use-async-synchronization-in-tests
-      - use-camel-case-environment-properties
-      - use-component-change-detection
-      - use-jest-extended-matchers-in-tests
-      - use-new-async-in-tests
-      - use-shorthand-property-in-object-creation
+      - use-shorthand-property-in-object-creation   <- not sure if typescript works but: https://eslint.org/docs/rules/object-shorthand
+      - ngrx-use-empty-store-type                   <- should be this: https://github.com/timdeschryver/eslint-plugin-ngrx/blob/main/docs/rules/no-typed-global-store.md
+      - lifecycle-cyclomatic-complexity             <- exists but maybe typescript issues and not limited to lifecycle: https://eslint.org/docs/rules/complexity
+      - force-jsdoc-comments                        <- custom rule but maybe https://github.com/gajus/eslint-plugin-jsdoc contains smth
+      - private-destroy-field                       <- custom rule, maybe doable with smth like https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/naming-convention.md
+      - use-camel-case-environment-properties       <- custom rule, maybe through https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/naming-convention.md
+      - use-jest-extended-matchers-in-tests         <- custom rule, I think this doesnt do enough: https://github.com/jest-community/eslint-plugin-jest/blob/HEAD/docs/rules/no-restricted-matchers.md
+      - no-star-imports-in-store                    <- custom rule, not sure how necessary this still is but good for consistency
+      - newline-before-root-members                 <- custom rule, maybe prettier exists?
+      - ish-useful-imports                          <- custom rule, not sure what it does.
+      - component-creation-test                     <- custom rule
+      - do-not-use-then-with-testbed-in-tests       <- custom rule
+      - initialize-observables-in-ngoninit          <- custom rule
+      - no-assignment-to-inputs                     <- custom rule
+      - no-intelligence-in-artifacts                <- custom rule
+      - no-suspicious-variable-init-in-tests        <- custom rule
+      - use-async-synchronization-in-tests          <- custom rule
+      - use-component-change-detection              <- custom rule
+      - use-new-async-in-tests                      <- custom rule
 
 
-      Outside:
-      - ban
+    Outside:
+      - ban                                         <- https://github.com/remithomas/eslint-plugin-ban
       - no-collapsible-if                           <- https://github.com/SonarSource/eslint-plugin-sonarjs/blob/master/docs/rules/no-collapsible-if.md
       - no-commented-out-code                       <- https://github.com/cartant/eslint-plugin-etc/blob/main/docs/rules/no-commented-out-code.md
       - no-extra-boolean-cast                       <- https://eslint.org/docs/rules/no-extra-boolean-cast
       - no-return-undefined                         <- https://eslint.org/docs/rules/consistent-return
       - no-static-this                              <- https://github.com/typescript-eslint/typescript-eslint/issues/2271#issuecomment-653858188
-      - no-unnecessary-callback-wrapper
-      - no-unnecessary-type-annotation
-      - no-unused
-      - no-var-before-return
-      - prefer-method-signature
-      - prefer-switch
-      - project-structure
-      - throw-error
+      - no-unnecessary-callback-wrapper             <- eslint rule doesn't exist, can cause problems sometimes? maybe remove.
+      - no-unnecessary-type-annotation              <- not 100% the same but https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-inferrable-types.md
+      - no-unused                                   <- https://eslint.org/docs/rules/no-unused-vars
+      - no-var-before-return                        <- cant find an eslint rule.
+      - prefer-method-signature                     <- https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/method-signature-style.md
+      - prefer-switch                               <- https://github.com/sindresorhus/eslint-plugin-unicorn/blob/main/docs/rules/prefer-switch.md
+      - project-structure                           <- cant find a rule but it HAS to exist
+      - throw-error                                 <- https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-throw-literal.md
 
-    NEEDS DECISION:
+    Need Decisions:
       - prettier split from eslint
       - "@angular-eslint/no-output-native": "off",                <- seems useful but not enforced right now                                                          ! (maybe) on but carefully
       - @typescript-eslint/ban-types                              <- extending defaults seems useful and good but causes lots of problems right now                   ! maybe, 60 changes
-      Done:
+      - @typescript-eslint/ban-tslint-comment                     <- useful for after migration in projects
+      - @typescript-eslint/no-var-requires                        <- shouldn't use this with typescript, maybe default already https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-var-requires.md
+      - @eslint-plugin-jest/no-restricted-matchers                <- to make sure tsmockito is used https://github.com/jest-community/eslint-plugin-jest/blob/HEAD/docs/rules/no-restricted-matchers.md
+      - new stuff from https://github.com/timdeschryver/eslint-plugin-ngrx
+      - maybe use ngrx concatLatestFrom in effects?                    <- https://medium.com/javascript-everyday/concatlatestfrom-operator-edge-case-617bd9e7f88a
+
+    Done:
       - rxjs-finnish
       - rxjs-no-ignored-subscribe
       - rxjs-no-subclass
@@ -58,7 +64,7 @@
       - "jsdoc/newline-after-description": "off",                 <- seems useful but not enforced right now                                                          ! new-line
       - "jsdoc/check-alignment": "off",                           <- seems useful but not enforced right now                                                          ! on
       - @typescript-eslint/naming-convention                      <- eslint disable for lazy component schematic or disable linting for these components overall?     ! adapt schematic
-      -"@angular-eslint/template/no-negated-async": "off",        <- seems useful but not enforced right now                                                          ! on
+      - "@angular-eslint/template/no-negated-async": "off",        <- seems useful but not enforced right now                                                          ! on
       - "@angular-eslint/no-output-on-prefix": "off",             <- seems useful but not enforced right now                                                          ! on but as warning
       - "no-underscore-dangle": "off",                            <- recommended but we use it a lot                                                                  ! keep off, Danilo fragen
       - @typescript-eslint/no-empty-interface                     <- lots of issues with EntityState, I would replace with type instead of interface                  ! keep on
