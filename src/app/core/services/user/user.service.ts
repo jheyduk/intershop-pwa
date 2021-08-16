@@ -45,6 +45,7 @@ export class UserService {
 
   /**
    * Sign in an existing user with the given login credentials (login, password).
+   *
    * @param loginCredentials  The users login credentials {login: 'foo', password. 'bar'}.
    * @returns                 The logged in customer data.
    *                          For private customers user data are also returned.
@@ -53,13 +54,14 @@ export class UserService {
   signInUser(loginCredentials: Credentials): Observable<CustomerUserType> {
     const headers = new HttpHeaders().set(
       ApiService.AUTHORIZATION_HEADER_KEY,
-      'BASIC ' + b64u.toBase64(b64u.encode(`${loginCredentials.login}:${loginCredentials.password}`))
+      `BASIC ${b64u.toBase64(b64u.encode(`${loginCredentials.login}:${loginCredentials.password}`))}`
     );
 
     return this.fetchCustomer({ headers });
   }
   /**
    * Sign in an existing user with the given token or if no token is given, using token stored in cookie.
+   *
    * @param token             The token that is used to login user.
    * @returns                 The logged in customer data.
    *                          For private customers user data are also returned.
@@ -89,6 +91,7 @@ export class UserService {
 
   /**
    * Create a new user for the given data.
+   *
    * @param body  The user data (customer, user, credentials, address) to create a new user.
    */
   createUser(body: CustomerRegistrationType): Observable<CustomerUserType> {
@@ -101,45 +104,45 @@ export class UserService {
       mainDivision: body.address.mainDivisionCode,
     };
 
-    let newCustomer$: Observable<CreatePrivateCustomerType | CreateBusinessCustomerType>;
-    newCustomer$ = this.appFacade.currentLocale$.pipe(
-      map(currentLocale =>
-        body.customer.isBusinessCustomer
-          ? {
-              type: 'SMBCustomer',
-              ...body.customer,
-              ...(body.user
-                ? {
-                    user: {
-                      ...body.user,
+    const newCustomer$: Observable<CreatePrivateCustomerType | CreateBusinessCustomerType> =
+      this.appFacade.currentLocale$.pipe(
+        map(currentLocale =>
+          body.customer.isBusinessCustomer
+            ? {
+                type: 'SMBCustomer',
+                ...body.customer,
+                ...(body.user
+                  ? {
+                      user: {
+                        ...body.user,
+                        preferredLanguage: currentLocale,
+                      },
+                    }
+                  : {
+                      userId: body.userId,
+                    }),
+                address: customerAddress,
+                credentials: body.credentials,
+              }
+            : {
+                type: 'PrivateCustomer',
+                ...body.customer,
+                ...(body.user
+                  ? {
+                      firstName: body.user.firstName,
+                      lastName: body.user.lastName,
+                      email: body.user.email,
                       preferredLanguage: currentLocale,
-                    },
-                  }
-                : {
-                    userId: body.userId,
-                  }),
-              address: customerAddress,
-              credentials: body.credentials,
-            }
-          : {
-              type: 'PrivateCustomer',
-              ...body.customer,
-              ...(body.user
-                ? {
-                    firstName: body.user.firstName,
-                    lastName: body.user.lastName,
-                    email: body.user.email,
-                    preferredLanguage: currentLocale,
-                  }
-                : {
-                    userId: body.userId,
-                  }),
-              address: customerAddress,
-              credentials: body.credentials,
-              preferredLanguage: currentLocale,
-            }
-      )
-    );
+                    }
+                  : {
+                      userId: body.userId,
+                    }),
+                address: customerAddress,
+                credentials: body.credentials,
+                preferredLanguage: currentLocale,
+              }
+        )
+      );
 
     return this.appFacade.isAppTypeREST$.pipe(
       first(),
@@ -156,6 +159,7 @@ export class UserService {
 
   /**
    * Updates the data of the currently logged in user.
+   *
    * @param body  The user data (customer, user ) to update the user.
    */
   updateUser(body: CustomerUserType, credentials?: Credentials): Observable<User> {
@@ -166,7 +170,7 @@ export class UserService {
     const headers = credentials
       ? new HttpHeaders().set(
           ApiService.AUTHORIZATION_HEADER_KEY,
-          'BASIC ' + b64u.toBase64(b64u.encode(`${credentials.login}:${credentials.password}`))
+          `BASIC ${b64u.toBase64(b64u.encode(`${credentials.login}:${credentials.password}`))}`
         )
       : undefined;
 
@@ -195,6 +199,7 @@ export class UserService {
 
   /**
    * Updates the password of the currently logged in user.
+   *
    * @param customer         The current customer.
    * @param user             The current user.
    * @param password         The new password to update to.
@@ -229,6 +234,7 @@ export class UserService {
 
   /**
    * Updates the customer data of the (currently logged in) b2b customer.
+   *
    * @param customer  The customer data to update the customer.
    */
   updateCustomer(customer: Customer): Observable<Customer> {
@@ -245,6 +251,7 @@ export class UserService {
 
   /**
    * Get User data for the logged in Business Customer.
+   *
    * @returns The related customer user data.
    */
   getCompanyUserData(): Observable<User> {
@@ -258,6 +265,7 @@ export class UserService {
 
   /**
    * Request an email for the given data user with a link to reset the users password.
+   *
    * @param data  The user data (email, firstName, lastName ) to identify the user.
    */
   requestPasswordReminder(data: PasswordReminder) {
@@ -271,6 +279,7 @@ export class UserService {
 
   /**
    * set new password with data based on requestPasswordReminder generated email
+   *
    * @param data  password, userID, secureCode
    */
   updateUserPasswordByReminder(data: PasswordReminderUpdate) {

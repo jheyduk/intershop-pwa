@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { TranslateModule } from '@ngx-translate/core';
 import { MockComponent } from 'ng-mocks';
-import { instance, mock } from 'ts-mockito';
+import { instance, mock, when } from 'ts-mockito';
 
 import { AccountFacade } from 'ish-core/facades/account.facade';
 import { AppFacade } from 'ish-core/facades/app.facade';
@@ -11,13 +11,18 @@ import { LoadingComponent } from 'ish-shared/components/common/loading/loading.c
 import { IdentityProviderLoginComponent } from 'ish-shared/components/login/identity-provider-login/identity-provider-login.component';
 
 import { LoginPageComponent } from './login-page.component';
+import { of } from 'rxjs';
 
 describe('Login Page Component', () => {
   let fixture: ComponentFixture<LoginPageComponent>;
   let component: LoginPageComponent;
   let element: HTMLElement;
+  let accountFacade: AccountFacade;
 
   beforeEach(async () => {
+    accountFacade = mock(AccountFacade);
+    when(accountFacade.isLoggedIn$).thenReturn(of(false));
+
     await TestBed.configureTestingModule({
       imports: [RouterTestingModule, TranslateModule.forRoot()],
       declarations: [
@@ -26,7 +31,7 @@ describe('Login Page Component', () => {
         MockComponent(LoadingComponent),
       ],
       providers: [
-        { provide: AccountFacade, useFactory: () => instance(mock(AccountFacade)) },
+        { provide: AccountFacade, useFactory: () => instance(accountFacade) },
         { provide: AppFacade, useFactory: () => instance(mock(AppFacade)) },
       ],
     }).compileComponents();

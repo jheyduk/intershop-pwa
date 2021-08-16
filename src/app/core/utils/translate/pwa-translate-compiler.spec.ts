@@ -106,30 +106,30 @@ describe('Pwa Translate Compiler', () => {
     beforeEach(() => {
       translate.set(
         'multi',
-        "HEADLINE: {{ gender, select, =male {He} =female {She} other {They} }} {{like, select, =true{enjoyed} other{didn't like}}} buying {{ items, plural, =0{nothing} =1{# item} other{# items} }} at {{shop}}."
+        'HEADLINE: {{ gender, select, =male {He} =female {She} other {They} }} {{like, select, =true{enjoyed} other{didn\'t like}}} buying {{ items, plural, =0{nothing} =1{# item} other{# items} }} at {{shop}}.'
       );
     });
 
     it.each`
       gender      | items | like     | expected
       ${'male'}   | ${0}  | ${true}  | ${'HEADLINE: He enjoyed buying nothing at inTRONICS.'}
-      ${'male'}   | ${0}  | ${false} | ${"HEADLINE: He didn't like buying nothing at inTRONICS."}
+      ${'male'}   | ${0}  | ${false} | ${'HEADLINE: He didn\'t like buying nothing at inTRONICS.'}
       ${'female'} | ${0}  | ${true}  | ${'HEADLINE: She enjoyed buying nothing at inTRONICS.'}
-      ${'female'} | ${0}  | ${false} | ${"HEADLINE: She didn't like buying nothing at inTRONICS."}
+      ${'female'} | ${0}  | ${false} | ${'HEADLINE: She didn\'t like buying nothing at inTRONICS.'}
       ${'other'}  | ${0}  | ${true}  | ${'HEADLINE: They enjoyed buying nothing at inTRONICS.'}
-      ${'other'}  | ${0}  | ${false} | ${"HEADLINE: They didn't like buying nothing at inTRONICS."}
+      ${'other'}  | ${0}  | ${false} | ${'HEADLINE: They didn\'t like buying nothing at inTRONICS.'}
       ${'male'}   | ${1}  | ${true}  | ${'HEADLINE: He enjoyed buying 1 item at inTRONICS.'}
-      ${'male'}   | ${1}  | ${false} | ${"HEADLINE: He didn't like buying 1 item at inTRONICS."}
+      ${'male'}   | ${1}  | ${false} | ${'HEADLINE: He didn\'t like buying 1 item at inTRONICS.'}
       ${'female'} | ${1}  | ${true}  | ${'HEADLINE: She enjoyed buying 1 item at inTRONICS.'}
-      ${'female'} | ${1}  | ${false} | ${"HEADLINE: She didn't like buying 1 item at inTRONICS."}
+      ${'female'} | ${1}  | ${false} | ${'HEADLINE: She didn\'t like buying 1 item at inTRONICS.'}
       ${'other'}  | ${1}  | ${true}  | ${'HEADLINE: They enjoyed buying 1 item at inTRONICS.'}
-      ${'other'}  | ${1}  | ${false} | ${"HEADLINE: They didn't like buying 1 item at inTRONICS."}
+      ${'other'}  | ${1}  | ${false} | ${'HEADLINE: They didn\'t like buying 1 item at inTRONICS.'}
       ${'male'}   | ${2}  | ${true}  | ${'HEADLINE: He enjoyed buying 2 items at inTRONICS.'}
-      ${'male'}   | ${2}  | ${false} | ${"HEADLINE: He didn't like buying 2 items at inTRONICS."}
+      ${'male'}   | ${2}  | ${false} | ${'HEADLINE: He didn\'t like buying 2 items at inTRONICS.'}
       ${'female'} | ${2}  | ${true}  | ${'HEADLINE: She enjoyed buying 2 items at inTRONICS.'}
-      ${'female'} | ${2}  | ${false} | ${"HEADLINE: She didn't like buying 2 items at inTRONICS."}
+      ${'female'} | ${2}  | ${false} | ${'HEADLINE: She didn\'t like buying 2 items at inTRONICS.'}
       ${'other'}  | ${2}  | ${true}  | ${'HEADLINE: They enjoyed buying 2 items at inTRONICS.'}
-      ${'other'}  | ${2}  | ${false} | ${"HEADLINE: They didn't like buying 2 items at inTRONICS."}
+      ${'other'}  | ${2}  | ${false} | ${'HEADLINE: They didn\'t like buying 2 items at inTRONICS.'}
     `(
       'should translate when gender "$gender" with $items item(s) and $like is given',
       ({ gender, items, like, expected }) => {
@@ -155,7 +155,7 @@ describe('Pwa Translate Compiler', () => {
 
     it.each`
       items | expected
-      ${0}  | ${"You don't have anything."}
+      ${0}  | ${'You don\'t have anything.'}
       ${1}  | ${'You have one item.'}
       ${2}  | ${'You have 2 items.'}
       ${3}  | ${'You have quite enough.'}

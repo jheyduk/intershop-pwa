@@ -87,7 +87,7 @@ export class FallbackMissingTranslationHandler implements MissingTranslationHand
         whenTruthy(),
         first(),
         map(translation => this.parser.interpolate(translation, params.interpolateParams)),
-        map(translation => (PRODUCTION_MODE ? translation : 'TRANSLATE_ME ' + translation))
+        map(translation => (PRODUCTION_MODE ? translation : `TRANSLATE_ME ${  translation}`))
       );
     }
     return params.key;

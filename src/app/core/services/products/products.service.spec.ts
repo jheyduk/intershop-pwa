@@ -71,7 +71,7 @@ describe('Products Service', () => {
     productsService = TestBed.inject(ProductsService);
   });
 
-  it("should get Product data when 'getProduct' is called", done => {
+  it('should get Product data when \'getProduct\' is called', done => {
     when(apiServiceMock.get(`products/${productSku}`, anything())).thenReturn(of({ sku: productSku } as Product));
     productsService.getProduct(productSku).subscribe(data => {
       expect(data.sku).toEqual(productSku);
@@ -80,7 +80,7 @@ describe('Products Service', () => {
     });
   });
 
-  it("should get a list of products SKUs for a given Category when 'getCategoryProducts' is called", done => {
+  it('should get a list of products SKUs for a given Category when \'getCategoryProducts\' is called', done => {
     when(apiServiceMock.get(`categories/${categoryId}/products`, anything())).thenReturn(of(productsMockData));
     productsService.getCategoryProducts(categoryId, 0).subscribe(data => {
       expect(data.products.map(p => p.sku)).toEqual(['ProductA', 'ProductB']);
@@ -108,7 +108,7 @@ describe('Products Service', () => {
     verify(apiServiceMock.get(anything(), anything())).once();
   });
 
-  it("should get product variations data when 'getProductVariations' is called", done => {
+  it('should get product variations data when \'getProductVariations\' is called', done => {
     when(apiServiceMock.get(`products/${productSku}/variations`)).thenReturn(of({ elements: [] }));
     productsService.getProductVariations(productSku).subscribe(() => {
       verify(apiServiceMock.get(`products/${productSku}/variations`)).once();
@@ -116,7 +116,7 @@ describe('Products Service', () => {
     });
   });
 
-  it("should get all product variations data when 'getProductVariations' is called and more than 50 variations exist", done => {
+  it('should get all product variations data when \'getProductVariations\' is called and more than 50 variations exist', done => {
     when(apiServiceMock.get(`products/${productSku}/variations`)).thenReturn(
       of({ elements: [], amount: 50, total: 56 })
     );
@@ -133,7 +133,7 @@ describe('Products Service', () => {
     });
   });
 
-  it("should get product bundles data when 'getProductBundles' is called", done => {
+  it('should get product bundles data when \'getProductBundles\' is called', done => {
     when(apiServiceMock.get(`products/${productSku}/bundles`)).thenReturn(of([]));
     productsService.getProductBundles(productSku).subscribe(() => {
       verify(apiServiceMock.get(`products/${productSku}/bundles`)).once();
@@ -141,7 +141,7 @@ describe('Products Service', () => {
     });
   });
 
-  it("should get retail set parts data when 'getRetailSetParts' is called", done => {
+  it('should get retail set parts data when \'getRetailSetParts\' is called', done => {
     when(apiServiceMock.get(`products/${productSku}/partOfRetailSet`)).thenReturn(of([]));
     productsService.getRetailSetParts(productSku).subscribe(() => {
       verify(apiServiceMock.get(`products/${productSku}/partOfRetailSet`)).once();
@@ -149,7 +149,7 @@ describe('Products Service', () => {
     });
   });
 
-  it("should get product links data when 'getProductLinks' is called", done => {
+  it('should get product links data when \'getProductLinks\' is called', done => {
     when(apiServiceMock.get(`products/${productSku}/links`)).thenReturn(of([]));
     productsService.getProductLinks(productSku).subscribe(() => {
       verify(apiServiceMock.get(`products/${productSku}/links`)).once();
@@ -157,7 +157,7 @@ describe('Products Service', () => {
     });
   });
 
-  it("should get map product links data when 'getProductLinks' is called", done => {
+  it('should get map product links data when \'getProductLinks\' is called', done => {
     when(apiServiceMock.get(`products/${productSku}/links`)).thenReturn(
       of({
         elements: [

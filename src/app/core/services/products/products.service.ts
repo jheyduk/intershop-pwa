@@ -36,6 +36,7 @@ export class ProductsService {
 
   /**
    * Get the full Product data for the given Product SKU.
+   *
    * @param sku  The Product SKU for the product of interest.
    * @returns    The Product data.
    */
@@ -53,6 +54,7 @@ export class ProductsService {
 
   /**
    * Get a sorted list of all products (as SKU list) assigned to a given Category respecting pagination.
+   *
    * @param categoryUniqueId  The unique Category ID.
    * @param page              The page to request (1-based numbering)
    * @param sortKey           The sortKey to sort the list, default value is ''.
@@ -102,6 +104,7 @@ export class ProductsService {
 
   /**
    * Get products for a given search term respecting pagination.
+   *
    * @param searchTerm    The search term to look for matching products.
    * @param page          The page to request (1-based numbering)
    * @param sortKey       The sortKey to sort the list, default value is ''.

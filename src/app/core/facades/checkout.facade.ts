@@ -50,7 +50,7 @@ import { getOrdersError, getSelectedOrder } from 'ish-core/store/customer/orders
 import { getLoggedInUser } from 'ish-core/store/customer/user';
 import { whenFalsy, whenTruthy } from 'ish-core/utils/operators';
 
-// tslint:disable:member-ordering
+/* eslint-disable @typescript-eslint/member-ordering */
 @Injectable({ providedIn: 'root' })
 export class CheckoutFacade {
   private basketChangeInternal$ = new Subject<void>();

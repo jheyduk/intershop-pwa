@@ -47,7 +47,7 @@ export class CheckoutShippingComponent implements OnInit, OnDestroy {
           wrappers: ['shipping-radio-wrapper'],
           templateOptions: {
             shippingMethod: method,
-            id: 'shipping_method' + method.id,
+            id: `shipping_method${  method.id}`,
             value: method.id,
           },
         }))

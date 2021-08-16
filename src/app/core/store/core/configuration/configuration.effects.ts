@@ -58,7 +58,7 @@ export class ConfigurationEffects {
   ) {
     appRef.isStable
       .pipe(takeWhile(() => isPlatformBrowser(platformId)))
-      // tslint:disable-next-line:no-any - window can only be used with any here
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any -- window can only be used with any here
       .subscribe(stable => ((window as any).angularStable = stable));
 
     const languageChanged$ = translateService.onLangChange.pipe(shareReplay(1));

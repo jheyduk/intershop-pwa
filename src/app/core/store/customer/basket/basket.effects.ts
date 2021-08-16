@@ -288,6 +288,7 @@ export class BasketEffects {
   );
 
   /** check whether a specific custom attribute exists at basket.
+   *
    * @param basket
    * @param attributeName
    */

@@ -27,7 +27,7 @@
     </ng-container>
 
     <ng-template #quotePending>
-      <div *ngIf="state === 'Responded' && !(isQuoteStarted$ | async)" class="alert alert-info">
+      <div *ngIf="state === 'Responded' && (isQuoteStarted$ | async) === false" class="alert alert-info">
         {{ 'quote.error.not_started' | translate }}
       </div>
     </ng-template>

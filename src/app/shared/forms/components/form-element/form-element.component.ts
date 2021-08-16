@@ -28,11 +28,11 @@ export abstract class FormElementComponent {
   @Input() label: string;
   /**
     css-class for the label (default: 'col-md-4')
-  */
+   */
   @Input() labelClass = 'col-md-4';
   /**
     css-class for the input/select field (default: 'col-md-8')
-  */
+   */
   @Input() inputClass = 'col-md-8';
   /**
    * decides whether to show a required sign after the label
@@ -70,6 +70,7 @@ export abstract class FormElementComponent {
   }
 
   /** decides whether to show a required sign after the label in dependence of the markRequiredLabel
+   *
    * @returns true, if markRequiredLabel= 'on'
    * @returns false, if markRequiredLabel= 'off',
    * @returns whether the control is a required field and markRequiredLabel = 'auto'
