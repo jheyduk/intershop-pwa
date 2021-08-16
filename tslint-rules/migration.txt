@@ -1,0 +1,67 @@
+      Custom:
+      - ban-specific-imports
+      - component-creation-test
+      - do-not-use-then-with-testbed-in-tests
+      - force-jsdoc-comments
+      - initialize-observables-in-ngoninit
+      - ish-no-object-literal-type-assertion
+      - ish-ordered-imports
+      - ish-useful-imports
+      - lifecycle-cyclomatic-complexity
+      - meaningful-naming-in-tests
+      - newline-before-root-members
+      - ng-module-sorted-fields
+      - ngrx-use-empty-store-type
+      - no-assignment-to-inputs
+      - no-commented-out-tests
+      - no-disabled-tests
+      - no-focused-tests                            <- https://www.npmjs.com/package/eslint-plugin-jest
+      - no-intelligence-in-artifacts
+      - no-star-imports-in-store
+      - no-suspicious-variable-init-in-tests
+      - private-destroy-field
+      - use-async-synchronization-in-tests
+      - use-camel-case-environment-properties
+      - use-component-change-detection
+      - use-jest-extended-matchers-in-tests
+      - use-new-async-in-tests
+      - use-shorthand-property-in-object-creation
+
+
+      Outside:
+      - ban
+      - no-collapsible-if                           <- https://github.com/SonarSource/eslint-plugin-sonarjs/blob/master/docs/rules/no-collapsible-if.md
+      - no-commented-out-code                       <- https://github.com/cartant/eslint-plugin-etc/blob/main/docs/rules/no-commented-out-code.md
+      - no-extra-boolean-cast                       <- https://eslint.org/docs/rules/no-extra-boolean-cast
+      - no-return-undefined                         <- https://eslint.org/docs/rules/consistent-return
+      - no-static-this                              <- https://github.com/typescript-eslint/typescript-eslint/issues/2271#issuecomment-653858188
+      - no-unnecessary-callback-wrapper
+      - no-unnecessary-type-annotation
+      - no-unused
+      - no-var-before-return
+      - prefer-method-signature
+      - prefer-switch
+      - project-structure
+      - throw-error
+
+    NEEDS DECISION:
+      - prettier split from eslint
+      - "@angular-eslint/no-output-native": "off",                <- seems useful but not enforced right now                                                          ! (maybe) on but carefully
+      - @typescript-eslint/ban-types                              <- extending defaults seems useful and good but causes lots of problems right now                   ! maybe, 60 changes
+      Done:
+      - rxjs-finnish
+      - rxjs-no-ignored-subscribe
+      - rxjs-no-subclass
+      - rxjs-no-unsafe-catch
+      - rxjs-no-unsafe-switchmap
+      - rxjs-prefer-angular-takeuntil
+      - "jsdoc/newline-after-description": "off",                 <- seems useful but not enforced right now                                                          ! new-line
+      - "jsdoc/check-alignment": "off",                           <- seems useful but not enforced right now                                                          ! on
+      - @typescript-eslint/naming-convention                      <- eslint disable for lazy component schematic or disable linting for these components overall?     ! adapt schematic
+      -"@angular-eslint/template/no-negated-async": "off",        <- seems useful but not enforced right now                                                          ! on
+      - "@angular-eslint/no-output-on-prefix": "off",             <- seems useful but not enforced right now                                                          ! on but as warning
+      - "no-underscore-dangle": "off",                            <- recommended but we use it a lot                                                                  ! keep off, Danilo fragen
+      - @typescript-eslint/no-empty-interface                     <- lots of issues with EntityState, I would replace with type instead of interface                  ! keep on
+      - member-ordering                                           <- private static always after static?                                                              ! keep on, warning
+      - prefer-template                                           <- enforce disallow string concatenation?                                                           ! on, warning
+      - prefer-arrow/prefer-arrow-functions                       <- allowStandaloneDeclarations ? disable alltogether?                                               ! eher disablen

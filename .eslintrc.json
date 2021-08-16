@@ -1,0 +1,205 @@
+{
+  "root": true,
+  "ignorePatterns": ["projects/**/*"],
+  "overrides": [
+    {
+      "files": ["*.ts"],
+      "parserOptions": {
+        "project": ["tsconfig.json", "e2e/tsconfig.json"],
+        "createDefaultProgram": true
+      },
+      "extends": [
+        "plugin:@angular-eslint/ng-cli-compat",
+        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
+        "plugin:@angular-eslint/template/process-inline-templates"
+      ],
+      "plugins": [
+        "eslint-plugin-react",
+        "eslint-plugin-rxjs",
+        "eslint-plugin-rxjs-angular",
+        "eslint-plugin-no-null",
+        "prettier"
+      ],
+      "rules": {
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": ["ish"],
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": ["ish"],
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/no-output-native": "off",
+        "@angular-eslint/no-output-on-prefix": "warn",
+        "@typescript-eslint/ban-types": [
+          "error",
+          {
+            "types": {
+              "Object": {
+                "message": "Use {} instead."
+              },
+              "Array": {
+                "message": "Use [] instead."
+              },
+              "String": {
+                "message": "Use 'string'"
+              },
+              "Boolean": {
+                "message": "Use 'boolean'"
+              },
+              "Number": {
+                "message": "Use 'number'"
+              },
+              "HttpErrorResponse": {
+                "message": "HttpErrorResponse should not be used directly."
+              }
+            },
+            "extendDefaults": false
+          }
+        ],
+        "@typescript-eslint/consistent-type-definitions": "error",
+        "@typescript-eslint/explicit-member-accessibility": [
+          "error",
+          {
+            "accessibility": "no-public"
+          }
+        ],
+        "@typescript-eslint/member-ordering": [
+          "warn",
+          {
+            "default": [
+              "public-static-field",
+              "static-field",
+              "instance-field",
+              "public-static-method",
+              "static-method",
+              "instance-method"
+            ]
+          }
+        ],
+        "@typescript-eslint/naming-convention": [
+          "error",
+          {
+            "selector": "variable",
+            "modifiers": ["const"],
+            "format": ["camelCase", "UPPER_CASE"]
+          },
+          {
+            "selector": "typeLike",
+            "format": ["PascalCase"]
+          },
+          {
+            "selector": "function",
+            "format": ["camelCase"]
+          }
+        ],
+        "@typescript-eslint/no-empty-function": "warn",
+        "@typescript-eslint/no-explicit-any": "warn",
+        "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
+        "@typescript-eslint/no-unused-expressions": [
+          "error",
+          { "allowTernary": true }
+        ],
+        "@typescript-eslint/quotes": [
+          "warn",
+          "single",
+          { "allowTemplateLiterals": true }
+        ],
+        "arrow-body-style": ["error", "as-needed"],
+        "arrow-parens": ["error", "as-needed"],
+        "comma-dangle": "off",
+        // disabled in favor of @typescript-eslint/dot-notation
+        "dot-notation": "off",
+        "id-blacklist": [
+          "error",
+          "any",
+          "Number",
+          "String",
+          "string",
+          "Boolean",
+          "boolean",
+          "Undefined",
+          "undefined"
+        ],
+        "eqeqeq": ["error", "always"],
+        "jsdoc/newline-after-description": ["warn", "always"],
+        "jsdoc/check-alignment": "warn",
+        "linebreak-style": "off",
+        "max-len": [
+          "off",
+          {
+            "code": 140
+          }
+        ],
+        "newline-per-chained-call": "off",
+        "no-duplicate-imports": "error",
+        "no-empty": "warn",
+        "no-extra-semi": "off",
+        "no-irregular-whitespace": "error",
+        "no-multiple-empty-lines": "error",
+        "no-null/no-null": "error",
+        "no-param-reassign": "error",
+        "no-sequences": "error",
+        "no-template-curly-in-string": "error",
+        "no-underscore-dangle": "off",
+        "prefer-template": "warn",
+        "prefer-arrow/prefer-arrow-functions": "off",
+        "react/jsx-curly-spacing": "off",
+        "react/jsx-equals-spacing": "off",
+        "react/jsx-tag-spacing": [
+          "off",
+          {
+            "afterOpening": "allow",
+            "closingSlash": "allow"
+          }
+        ],
+        "react/jsx-wrap-multilines": "off",
+        "rxjs/finnish": [
+          "error",
+          {
+            "functions": false,
+            "methods": false,
+            "parameters": false,
+            "properties": false,
+            "variables": true
+          }
+        ],
+        "rxjs/no-create": "error",
+        "rxjs/no-ignored-replay-buffer": "error",
+        "rxjs/no-ignored-subscribe": "error",
+        "rxjs/no-internal": "error",
+        "rxjs/no-nested-subscribe": "warn",
+        "rxjs/no-subclass": "error",
+        "rxjs/no-subject-unsubscribe": "error",
+        "rxjs/no-subject-value": "error",
+        "rxjs/no-unsafe-catch": "error",
+        "rxjs/no-unsafe-subject-next": "error",
+        "rxjs/no-unsafe-switchmap": "error",
+        "rxjs/no-unsafe-takeuntil": "error",
+        "rxjs-angular/prefer-takeuntil": [
+          "error",
+          {
+            "checkDestroy": true,
+            "checkComplete": true,
+            "checkDecorators": ["Component", "Pipe", "Directive"]
+          }
+        ],
+        "space-before-function-paren": "off",
+        "space-in-parens": ["off", "never"]
+      }
+    },
+    {
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
+      "rules": {}
+    }
+  ]
+}

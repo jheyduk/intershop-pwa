@@ -1,0 +1,77 @@
+9 ESLint rules behave differently from their TSLint counterparts:
+  * arrow-body-style:
+    - ESLint will throw an error if the function body is multiline yet has a one-line return on it.
+  * prefer-arrow/prefer-arrow-functions:
+    - ESLint does not support allowing named functions defined with the function keyword.
+  * no-console:
+    - Custom console methods, if they exist, will no longer be allowed.
+  * @typescript-eslint/no-unused-expressions:
+    - The TSLint optional config "allow-new" is the default ESLint behavior and will no longer be ignored.
+  * brace-style:
+    - ESLint's brace-style will check all tokens.
+  * one-var:
+    - Variables declared in for loops will no longer be checked.
+  * no-underscore-dangle:
+    - Leading or trailing underscores (_) on identifiers will now be forbidden.
+  * prefer-template:
+    - Single concatenations will no longer be ignored.
+  * padded-blocks:
+    - ESLint's padded-blocks rule also bans a blank line before a closing brace.
+
+Error: multiple output react/jsx-curly-spacing ESLint rule options were generated, but tslint-to-eslint-config doesn't have "merger" logic to deal with this.
+Please file an issue at https://github.com/typescript-eslint/tslint-to-eslint-config/issues/new?template=missing_merger.md. Thanks!
+
+50 rules are not known by tslint-to-eslint-config to have ESLint equivalents:
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "ban".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "ban-specific-imports".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "component-creation-test".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "do-not-use-then-with-testbed-in-tests".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "force-jsdoc-comments".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "import-spacing".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "initialize-observables-in-ngoninit".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "ish-deprecation".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "ish-no-object-literal-type-assertion".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "ish-ordered-imports".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "ish-useful-imports".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "lifecycle-cyclomatic-complexity".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "meaningful-naming-in-tests".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "naming-convention".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "newline-before-root-members".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "ng-module-sorted-fields".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "ngrx-use-empty-store-type".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "no-assignment-to-inputs".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "no-commented-out-code".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "no-commented-out-tests".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "no-disabled-tests".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "no-extra-boolean-cast".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "no-focused-tests".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "no-intelligence-in-artifacts".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "no-return-undefined".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "no-star-imports-in-store".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "no-static-this".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "no-suspicious-variable-init-in-tests".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "no-unnecessary-callback-wrapper".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "no-unnecessary-type-annotation".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "no-unused".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "no-var-before-return".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "prefer-method-signature".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "prettier".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "private-destroy-field".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "project-structure".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "rxjs-finnish".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "rxjs-no-ignored-subscribe".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "rxjs-no-subclass".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "rxjs-no-unsafe-catch".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "rxjs-no-unsafe-switchmap".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "rxjs-prefer-angular-takeuntil".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "throw-error".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "use-async-synchronization-in-tests".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "use-camel-case-environment-properties".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "use-component-change-detection".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "use-jest-extended-matchers-in-tests".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "use-new-async-in-tests".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "use-shorthand-property-in-object-creation".
+  * tslint-to-eslint-config does not know the ESLint equivalent for TSLint's "whitespace".
+
+  * import-destructuring-spacing
+
