@@ -3,7 +3,6 @@
       - ban-specific-imports                        <- https://eslint.org/docs/rules/no-restricted-imports
       - ish-ordered-imports                         <- https://eslint.org/docs/rules/sort-imports
       - meaningful-naming-in-tests                  <- https://github.com/jest-community/eslint-plugin-jest/blob/HEAD/docs/rules/valid-title.md with mustMatch
-      - ng-module-sorted-fields                     <- https://github.com/angular-eslint/angular-eslint/blob/master/packages/eslint-plugin/src/rules/sort-ngmodule-metadata-arrays.ts
       - use-shorthand-property-in-object-creation   <- not sure if typescript works but: https://eslint.org/docs/rules/object-shorthand
       - ngrx-use-empty-store-type                   <- should be this: https://github.com/timdeschryver/eslint-plugin-ngrx/blob/main/docs/rules/no-typed-global-store.md
       - lifecycle-cyclomatic-complexity             <- exists but maybe typescript issues and not limited to lifecycle: https://eslint.org/docs/rules/complexity
@@ -42,6 +41,8 @@
 
     Need further work:
       - ish-no-object-literal-type-assertion        <- HOW TO DISABLE RULE FOR TESTS ONLY ? https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/consistent-type-assertions.md disable for tests
+      - sort-ngmodule-metadata-arrays               <- whats up with forRoot function calls etc?
+
 
     Need Decisions:
       - "@angular-eslint/no-output-native": "off",                <- seems useful but not enforced right now                                                          ! (maybe) on but carefully
@@ -53,6 +54,7 @@
       - maybe use ngrx concatLatestFrom in effects?                    <- https://medium.com/javascript-everyday/concatlatestfrom-operator-edge-case-617bd9e7f88a
 
     Done:
+      - ng-module-sorted-fields                     <- https://github.com/angular-eslint/angular-eslint/blob/master/packages/eslint-plugin/src/rules/sort-ngmodule-metadata-arrays.ts
       - no-focused-tests                            <- https://www.npmjs.com/package/eslint-plugin-jest
       - no-disabled-tests                           <- https://www.npmjs.com/package/eslint-plugin-jest
       - no-commented-out-tests                      <- https://www.npmjs.com/package/eslint-plugin-jest

@@ -40,6 +40,7 @@
         ],
         "@angular-eslint/no-output-native": "off",
         "@angular-eslint/no-output-on-prefix": "warn",
+        "@angular-eslint/sort-ngmodule-metadata-arrays": "warn",
         "@typescript-eslint/ban-types": [
           "error",
           {
