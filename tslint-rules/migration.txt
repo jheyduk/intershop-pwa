@@ -1,19 +1,15 @@
       Custom:
+      - use-jest-extended-matchers-in-tests         <- custom rule, I think this doesnt do enough: https://github.com/jest-community/eslint-plugin-jest/blob/HEAD/docs/rules/no-restricted-matchers.md
       - ban-specific-imports                        <- https://eslint.org/docs/rules/no-restricted-imports
-      - ish-no-object-literal-type-assertion        <- https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/consistent-type-assertions.md disable for tests
       - ish-ordered-imports                         <- https://eslint.org/docs/rules/sort-imports
       - meaningful-naming-in-tests                  <- https://github.com/jest-community/eslint-plugin-jest/blob/HEAD/docs/rules/valid-title.md with mustMatch
       - ng-module-sorted-fields                     <- https://github.com/angular-eslint/angular-eslint/blob/master/packages/eslint-plugin/src/rules/sort-ngmodule-metadata-arrays.ts
-      - no-commented-out-tests                      <- https://www.npmjs.com/package/eslint-plugin-jest
-      - no-disabled-tests                           <- https://www.npmjs.com/package/eslint-plugin-jest
-      - no-focused-tests                            <- https://www.npmjs.com/package/eslint-plugin-jest
       - use-shorthand-property-in-object-creation   <- not sure if typescript works but: https://eslint.org/docs/rules/object-shorthand
       - ngrx-use-empty-store-type                   <- should be this: https://github.com/timdeschryver/eslint-plugin-ngrx/blob/main/docs/rules/no-typed-global-store.md
       - lifecycle-cyclomatic-complexity             <- exists but maybe typescript issues and not limited to lifecycle: https://eslint.org/docs/rules/complexity
       - force-jsdoc-comments                        <- custom rule but maybe https://github.com/gajus/eslint-plugin-jsdoc contains smth
       - private-destroy-field                       <- custom rule, maybe doable with smth like https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/naming-convention.md
       - use-camel-case-environment-properties       <- custom rule, maybe through https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/naming-convention.md
-      - use-jest-extended-matchers-in-tests         <- custom rule, I think this doesnt do enough: https://github.com/jest-community/eslint-plugin-jest/blob/HEAD/docs/rules/no-restricted-matchers.md
       - no-star-imports-in-store                    <- custom rule, not sure how necessary this still is but good for consistency
       - newline-before-root-members                 <- custom rule, maybe prettier exists?
       - ish-useful-imports                          <- custom rule, not sure what it does.
@@ -44,8 +40,10 @@
       - project-structure                           <- cant find a rule but it HAS to exist
       - throw-error                                 <- https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-throw-literal.md
 
+    Need further work:
+      - ish-no-object-literal-type-assertion        <- HOW TO DISABLE RULE FOR TESTS ONLY ? https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/consistent-type-assertions.md disable for tests
+
     Need Decisions:
-      - prettier split from eslint
       - "@angular-eslint/no-output-native": "off",                <- seems useful but not enforced right now                                                          ! (maybe) on but carefully
       - @typescript-eslint/ban-types                              <- extending defaults seems useful and good but causes lots of problems right now                   ! maybe, 60 changes
       - @typescript-eslint/ban-tslint-comment                     <- useful for after migration in projects
@@ -55,6 +53,9 @@
       - maybe use ngrx concatLatestFrom in effects?                    <- https://medium.com/javascript-everyday/concatlatestfrom-operator-edge-case-617bd9e7f88a
 
     Done:
+      - no-focused-tests                            <- https://www.npmjs.com/package/eslint-plugin-jest
+      - no-disabled-tests                           <- https://www.npmjs.com/package/eslint-plugin-jest
+      - no-commented-out-tests                      <- https://www.npmjs.com/package/eslint-plugin-jest
       - rxjs-finnish
       - rxjs-no-ignored-subscribe
       - rxjs-no-subclass

@@ -18,6 +18,7 @@
         "eslint-plugin-rxjs",
         "eslint-plugin-rxjs-angular",
         "eslint-plugin-no-null",
+        "jest",
         "prettier"
       ],
       "rules": {
@@ -63,6 +64,13 @@
               }
             },
             "extendDefaults": false
+          }
+        ],
+        "@typescript-eslint/consistent-type-assertions": [
+          "error",
+          {
+            "assertionStyle": "as",
+            "objectLiteralTypeAssertions": "never"
           }
         ],
         "@typescript-eslint/consistent-type-definitions": "error",
@@ -130,6 +138,9 @@
           "undefined"
         ],
         "eqeqeq": ["error", "always"],
+        "jest/no-commented-out-tests": "error",
+        "jest/no-disabled-tests": "error",
+        "jest/no-focused-tests": "error",
         "jsdoc/newline-after-description": ["warn", "always"],
         "jsdoc/check-alignment": "warn",
         "linebreak-style": "off",

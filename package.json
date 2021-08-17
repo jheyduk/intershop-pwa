@@ -83,6 +83,7 @@
     "b64u": "^3.0.0",
     "bootstrap": "^4.6.0",
     "core-js": "^3.15.2",
+    "eslint-plugin-jest": "^24.4.0",
     "express": "^4.17.1",
     "express-http-proxy": "^1.6.2",
     "express-robots-txt": "0.5.0",
