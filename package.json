@@ -137,6 +137,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "latest",
     "eslint-plugin-jsdoc": "latest",
+    "eslint-plugin-ngrx": "^1.28.0",
     "eslint-plugin-no-null": "latest",
     "eslint-plugin-prefer-arrow": "latest",
     "eslint-plugin-react": "latest",

@@ -19,6 +19,7 @@
         "eslint-plugin-rxjs-angular",
         "eslint-plugin-no-null",
         "jest",
+        "ngrx",
         "prettier"
       ],
       "rules": {
@@ -157,6 +158,7 @@
           }
         ],
         "newline-per-chained-call": "off",
+        "ngrx/no-typed-global-store": "error",
         "no-duplicate-imports": "error",
         "no-empty": "warn",
         "no-extra-boolean-cast": "error",

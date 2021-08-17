@@ -2,7 +2,6 @@
       - use-jest-extended-matchers-in-tests                       <- custom rule, I think this doesnt do enough: https://github.com/jest-community/eslint-plugin-jest/blob/HEAD/docs/rules/no-restricted-matchers.md
       - ban-specific-imports                                      <- https://eslint.org/docs/rules/no-restricted-imports
       - meaningful-naming-in-tests                                <- https://github.com/jest-community/eslint-plugin-jest/blob/HEAD/docs/rules/valid-title.md with mustMatch
-      - ngrx-use-empty-store-type                                 <- should be this: https://github.com/timdeschryver/eslint-plugin-ngrx/blob/main/docs/rules/no-typed-global-store.md
       - lifecycle-cyclomatic-complexity                           <- exists but maybe typescript issues and not limited to lifecycle: https://eslint.org/docs/rules/complexity
       - force-jsdoc-comments                                      <- custom rule but maybe https://github.com/gajus/eslint-plugin-jsdoc contains smth
       - private-destroy-field                                     <- custom rule, maybe doable with smth like https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/naming-convention.md
@@ -50,6 +49,7 @@
       - no-unneccessary-type-annotation                           <- is the missing functionality from tslint rly necessary?
 
     Done:
+      - ngrx-use-empty-store-type                                 <- should be this: https://github.com/timdeschryver/eslint-plugin-ngrx/blob/main/docs/rules/no-typed-global-store.md
       - use-shorthand-property-in-object-creation                 <- not sure if typescript works but: https://eslint.org/docs/rules/object-shorthand
       - no-extra-boolean-cast                                     <- https://eslint.org/docs/rules/no-extra-boolean-cast
       - throw-error                                               <- https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-throw-literal.md
