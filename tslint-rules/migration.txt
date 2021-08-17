@@ -31,7 +31,6 @@
       - no-return-undefined                         <- https://eslint.org/docs/rules/consistent-return
       - no-static-this                              <- https://github.com/typescript-eslint/typescript-eslint/issues/2271#issuecomment-653858188
       - no-unnecessary-callback-wrapper             <- eslint rule doesn't exist, can cause problems sometimes? maybe remove.
-      - no-unnecessary-type-annotation              <- not 100% the same but https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-inferrable-types.md
       - no-unused                                   <- https://eslint.org/docs/rules/no-unused-vars
       - no-var-before-return                        <- cant find an eslint rule.
       - prefer-method-signature                     <- https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/method-signature-style.md
@@ -50,10 +49,11 @@
       - @typescript-eslint/ban-tslint-comment                     <- useful for after migration in projects
       - @typescript-eslint/no-var-requires                        <- shouldn't use this with typescript, maybe default already https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-var-requires.md
       - @eslint-plugin-jest/no-restricted-matchers                <- to make sure tsmockito is used https://github.com/jest-community/eslint-plugin-jest/blob/HEAD/docs/rules/no-restricted-matchers.md
-      - new stuff from https://github.com/timdeschryver/eslint-plugin-ngrx
-      - maybe use ngrx concatLatestFrom in effects?                    <- https://medium.com/javascript-everyday/concatlatestfrom-operator-edge-case-617bd9e7f88a
-
+      - new stuff from ngrx                                       <- https://github.com/timdeschryver/eslint-plugin-ngrx
+      - maybe use ngrx concatLatestFrom in effects?               <- https://medium.com/javascript-everyday/concatlatestfrom-operator-edge-case-617bd9e7f88a
+      - no-unneccessary-type-annotation                           <- is the missing functionality from tslint rly necessary?
     Done:
+      - no-unnecessary-type-annotation              <- not 100% the same but https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-inferrable-types.md
       - ng-module-sorted-fields                     <- https://github.com/angular-eslint/angular-eslint/blob/master/packages/eslint-plugin/src/rules/sort-ngmodule-metadata-arrays.ts
       - no-focused-tests                            <- https://www.npmjs.com/package/eslint-plugin-jest
       - no-disabled-tests                           <- https://www.npmjs.com/package/eslint-plugin-jest
