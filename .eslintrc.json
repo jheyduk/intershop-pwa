@@ -165,6 +165,13 @@
         "no-multiple-empty-lines": "error",
         "no-null/no-null": "error",
         "no-param-reassign": "error",
+        "no-restricted-syntax": [
+          "error",
+          {
+            "selector": "MethodDefinition[static = true] ThisExpression",
+            "message": "Static this usage can be confusing for newcomers. It can also become imprecise when used with extended classes when a static this of a parent class no longer specifically refers to the parent class."
+          }
+        ],
         "no-sequences": "error",
         "no-template-curly-in-string": "error",
         // disabled in favor of @typescript-eslint/no-throw-literal
