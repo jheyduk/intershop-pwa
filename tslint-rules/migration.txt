@@ -1,7 +1,6 @@
       Custom:
       - use-jest-extended-matchers-in-tests         <- custom rule, I think this doesnt do enough: https://github.com/jest-community/eslint-plugin-jest/blob/HEAD/docs/rules/no-restricted-matchers.md
       - ban-specific-imports                        <- https://eslint.org/docs/rules/no-restricted-imports
-      - ish-ordered-imports                         <- https://eslint.org/docs/rules/sort-imports
       - meaningful-naming-in-tests                  <- https://github.com/jest-community/eslint-plugin-jest/blob/HEAD/docs/rules/valid-title.md with mustMatch
       - use-shorthand-property-in-object-creation   <- not sure if typescript works but: https://eslint.org/docs/rules/object-shorthand
       - ngrx-use-empty-store-type                   <- should be this: https://github.com/timdeschryver/eslint-plugin-ngrx/blob/main/docs/rules/no-typed-global-store.md
@@ -27,8 +26,6 @@
       - ban                                         <- https://github.com/remithomas/eslint-plugin-ban
       - no-collapsible-if                           <- https://github.com/SonarSource/eslint-plugin-sonarjs/blob/master/docs/rules/no-collapsible-if.md
       - no-commented-out-code                       <- https://github.com/cartant/eslint-plugin-etc/blob/main/docs/rules/no-commented-out-code.md
-      - no-extra-boolean-cast                       <- https://eslint.org/docs/rules/no-extra-boolean-cast
-      - no-return-undefined                         <- https://eslint.org/docs/rules/consistent-return
       - no-static-this                              <- https://github.com/typescript-eslint/typescript-eslint/issues/2271#issuecomment-653858188
       - no-unnecessary-callback-wrapper             <- eslint rule doesn't exist, can cause problems sometimes? maybe remove.
       - no-unused                                   <- https://eslint.org/docs/rules/no-unused-vars
@@ -42,9 +39,11 @@
 
 
     Need Decisions:
+      - no-return-undefined                                       <- consistent return does not do the exact same, either adapt or own rule https://eslint.org/docs/rules/consistent-return
       - "@angular-eslint/no-output-native": "off",                <- seems useful but not enforced right now                                                          ! (maybe) on but carefully
       - prefer-method-signature                                   <- recommended and typesafe way vs what we currently do: https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/method-signature-style.md
       - @typescript-eslint/ban-types                              <- extending defaults seems useful and good but causes lots of problems right now                   ! maybe, 60 changes
+      - ish-ordered-imports                                       <- vanilla rules aren't the same, either eslint standard or simple import sort or custom rule https://eslint.org/docs/rules/sort-imports or https://github.com/lydell/eslint-plugin-simple-import-sort
       - @typescript-eslint/ban-tslint-comment                     <- useful for after migration in projects
       - @typescript-eslint/no-var-requires                        <- shouldn't use this with typescript, maybe default already https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-var-requires.md
       - @eslint-plugin-jest/no-restricted-matchers                <- to make sure tsmockito is used https://github.com/jest-community/eslint-plugin-jest/blob/HEAD/docs/rules/no-restricted-matchers.md
@@ -52,6 +51,7 @@
       - no-unneccessary-type-annotation                           <- is the missing functionality from tslint rly necessary?
 
     Done:
+      - no-extra-boolean-cast                       <- https://eslint.org/docs/rules/no-extra-boolean-cast
       - throw-error                                 <- https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-throw-literal.md
       - no-unnecessary-type-annotation              <- not 100% the same but https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-inferrable-types.md
       - ng-module-sorted-fields                     <- https://github.com/angular-eslint/angular-eslint/blob/master/packages/eslint-plugin/src/rules/sort-ngmodule-metadata-arrays.ts

@@ -159,6 +159,7 @@
         "newline-per-chained-call": "off",
         "no-duplicate-imports": "error",
         "no-empty": "warn",
+        "no-extra-boolean-cast": "error",
         "no-extra-semi": "off",
         "no-irregular-whitespace": "error",
         "no-multiple-empty-lines": "error",
