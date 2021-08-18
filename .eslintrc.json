@@ -20,6 +20,7 @@
         "eslint-plugin-no-null",
         "jest",
         "ngrx",
+        "sonarjs",
         "prettier"
       ],
       "rules": {
@@ -225,7 +226,8 @@
           }
         ],
         "space-before-function-paren": "off",
-        "space-in-parens": ["off", "never"]
+        "space-in-parens": ["off", "never"],
+        "sonarjs/no-collapsible-if": "warn"
       }
     },
     {

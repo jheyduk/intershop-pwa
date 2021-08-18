@@ -21,7 +21,6 @@
 
     Outside:
       - ban                                                       <- https://github.com/remithomas/eslint-plugin-ban
-      - no-collapsible-if                                         <- license not for copying - https://github.com/SonarSource/eslint-plugin-sonarjs/blob/master/docs/rules/no-collapsible-if.md
       - no-commented-out-code                                     <- https://github.com/cartant/eslint-plugin-etc/blob/main/docs/rules/no-commented-out-code.md
       - no-unnecessary-callback-wrapper                           <- eslint rule doesn't exist, can cause problems sometimes? maybe remove.
       - no-var-before-return                                      <- cant find an eslint rule.
@@ -37,6 +36,7 @@
       - prefer-method-signature                                   <- TRY AND UNDERSTAND , LEAVE AS IT IS - recommended and typesafe way vs what we currently do: https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/method-signature-style.md
       - ish-ordered-imports                                       <- OWN RULE TO RECREATE EARLIER BEHAVIOR - vanilla rules aren't the same, either eslint standard or simple import sort or custom rule https://eslint.org/docs/rules/sort-imports or https://github.com/lydell/eslint-plugin-simple-import-sort
       - @eslint-plugin-jest/no-restricted-matchers                <- IMPLEMENT - to make sure tsmockito is used https://github.com/jest-community/eslint-plugin-jest/blob/HEAD/docs/rules/no-restricted-matchers.md
+      - no-collapsible-if                                         <- NO AUTOFIX; IS OK? - license not for copying - https://github.com/SonarSource/eslint-plugin-sonarjs/blob/master/docs/rules/no-collapsible-if.md
 
     Need Decisions:
       - "@angular-eslint/no-output-native": "off",                <- seems useful but not enforced right now                                                          ! (maybe) on but carefully
