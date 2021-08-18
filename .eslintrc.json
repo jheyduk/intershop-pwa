@@ -21,6 +21,7 @@
         "jest",
         "ngrx",
         "sonarjs",
+        "etc",
         "prettier"
       ],
       "rules": {
@@ -148,6 +149,7 @@
           "undefined"
         ],
         "eqeqeq": ["error", "always"],
+        "etc/no-commented-out-code": "warn",
         "jest/no-commented-out-tests": "error",
         "jest/no-disabled-tests": "error",
         "jest/no-focused-tests": "error",
