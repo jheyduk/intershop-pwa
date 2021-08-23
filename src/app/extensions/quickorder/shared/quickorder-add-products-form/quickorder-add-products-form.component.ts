@@ -2,16 +2,18 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/
 import { FormControl, FormGroup } from '@angular/forms';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { TranslateService } from '@ngx-translate/core';
-import { Subject } from 'rxjs';
-import { debounceTime, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { EMPTY, Subject } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
 
+import { ProductContextFacade } from 'ish-core/facades/product-context.facade';
 import { ShoppingFacade } from 'ish-core/facades/shopping.facade';
-import { ProductCompletenessLevel, ProductHelper, SkuQuantityType } from 'ish-core/models/product/product.helper';
+import { SkuQuantityType } from 'ish-core/models/product/product.helper';
+import { whenTruthy } from 'ish-core/utils/operators';
 
 @Component({
   selector: 'ish-quickorder-add-products-form',
   templateUrl: './quickorder-add-products-form.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class QuickorderAddProductsFormComponent implements OnInit, OnDestroy {
   quickOrderForm: FormGroup = new FormGroup({});
@@ -74,27 +76,31 @@ export class QuickorderAddProductsFormComponent implements OnInit, OnDestroy {
               key: 'sku',
               type: 'ish-text-input-field',
               className: 'col-12 list-item search-container',
+              modelOptions: {
+                debounce: { default: 500 },
+              },
               templateOptions: {
                 fieldClass: 'col-12',
                 placeholder: 'shopping_cart.direct_order.item_placeholder',
               },
               asyncValidators: {
                 validProduct: {
-                  expression: (control: FormControl) =>
-                    control.valueChanges.pipe(
-                      tap(sku => {
-                        if (!sku) {
-                          control.setErrors(undefined);
-                        }
-                      }),
-                      debounceTime(500),
-                      switchMap(() => this.shoppingFacade.product$(control.value, ProductCompletenessLevel.List)),
-                      tap(product => {
-                        const failed = ProductHelper.isFailedLoading(product);
-                        control.setErrors(failed ? { validProduct: false } : undefined);
-                      }),
-                      takeUntil(this.destroy$)
-                    ),
+                  expression: (control: FormControl, config: FormlyFieldConfig) => {
+                    const context: ProductContextFacade = config.templateOptions.context;
+                    if (context) {
+                      return context.select('product').pipe(
+                        whenTruthy(),
+                        tap(product => {
+                          control.setErrors(
+                            product.failed && control.value.trim !== '' ? { validProduct: false } : undefined
+                          );
+                        }),
+                        takeUntil(this.destroy$)
+                      );
+                    } else {
+                      return EMPTY;
+                    }
+                  },
                   message: (_: unknown, field: FormlyFieldConfig) =>
                     this.translate.get('quickorder.page.error.invalid.product', {
                       0: this.model.addProducts[parseInt(field.parent.key.toString(), 10)].sku,

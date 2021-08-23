@@ -3,12 +3,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subject } from 'rxjs';
-import { debounceTime, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, takeUntil, tap } from 'rxjs/operators';
 
 import { CheckoutFacade } from 'ish-core/facades/checkout.facade';
 import { ProductContextFacade } from 'ish-core/facades/product-context.facade';
-import { ShoppingFacade } from 'ish-core/facades/shopping.facade';
-import { ProductCompletenessLevel, ProductHelper } from 'ish-core/models/product/product.helper';
 import { GenerateLazyComponent } from 'ish-core/utils/module-loader/generate-lazy-component.decorator';
 import { whenTruthy } from 'ish-core/utils/operators';
 
@@ -25,12 +23,11 @@ export class DirectOrderComponent implements OnInit, OnDestroy, AfterViewInit {
   model = { sku: '' };
 
   hasQuantityError$: Observable<boolean>;
-  loading = false;
+  loading$: Observable<boolean>;
 
   private destroy$ = new Subject();
 
   constructor(
-    private shoppingFacade: ShoppingFacade,
     private checkoutFacade: CheckoutFacade,
     private translate: TranslateService,
     private context: ProductContextFacade
@@ -44,8 +41,15 @@ export class DirectOrderComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.context.connect('sku', this.directOrderForm.get('sku').valueChanges);
+    this.context.connect(
+      'sku',
+      this.directOrderForm.get('sku').valueChanges.pipe(
+        tap(() => this.context.set('loading', () => true)),
+        debounceTime(500)
+      )
+    );
     this.context.connect('maxQuantity', this.checkoutFacade.basketMaxItemQuantity$);
+    this.loading$ = this.context.select('loading');
   }
 
   ngOnDestroy() {
@@ -72,20 +76,12 @@ export class DirectOrderComponent implements OnInit, OnDestroy, AfterViewInit {
         asyncValidators: {
           validProduct: {
             expression: (control: FormControl) =>
-              control.valueChanges.pipe(
-                tap(sku => {
-                  if (!sku) {
-                    control.setErrors(undefined);
-                  } else {
-                    this.loading = true;
-                  }
-                }),
+              this.context.select('product').pipe(
                 whenTruthy(),
-                debounceTime(500),
-                switchMap(() => this.shoppingFacade.product$(control.value, ProductCompletenessLevel.List)),
                 tap(product => {
-                  control.setErrors(ProductHelper.isFailedLoading(product) ? { validProduct: false } : undefined);
-                  this.loading = false;
+                  control.setErrors(
+                    product.failed && this.directOrderForm.get('sku').value !== '' ? { validProduct: false } : undefined
+                  );
                 }),
                 takeUntil(this.destroy$)
               ),
