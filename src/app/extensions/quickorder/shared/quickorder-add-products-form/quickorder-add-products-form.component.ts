@@ -83,7 +83,7 @@ export class QuickorderAddProductsFormComponent implements OnInit, OnDestroy {
               validation: {
                 messages: {
                   required: 'quickorder.page.quantityWithoutSKU',
-                  validProduct: (_: unknown, field: FormlyFieldConfig) =>
+                  validProduct: (_, field) =>
                     this.translate.get('quickorder.page.error.invalid.product', {
                       0: this.model.addProducts[parseInt(field.parent.key.toString(), 10)].sku,
                     }),

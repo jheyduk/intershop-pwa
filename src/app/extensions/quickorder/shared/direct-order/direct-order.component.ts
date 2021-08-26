@@ -1,4 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subject } from 'rxjs';
@@ -7,7 +8,6 @@ import { debounceTime, takeUntil, tap } from 'rxjs/operators';
 import { CheckoutFacade } from 'ish-core/facades/checkout.facade';
 import { ProductContextFacade } from 'ish-core/facades/product-context.facade';
 import { GenerateLazyComponent } from 'ish-core/utils/module-loader/generate-lazy-component.decorator';
-import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'ish-direct-order',
@@ -49,14 +49,11 @@ export class DirectOrderComponent implements OnInit, OnDestroy, AfterViewInit {
     );
     this.context
       .select('product')
-      .pipe(
-        tap(product => {
-          const formControl = this.directOrderForm.get('sku');
-          formControl.setErrors(product.failed && formControl.value.trim !== '' ? { validProduct: false } : undefined);
-        }),
-        takeUntil(this.destroy$)
-      )
-      .subscribe();
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(product => {
+        const formControl = this.directOrderForm.get('sku');
+        formControl.setErrors(product.failed && formControl.value.trim !== '' ? { validProduct: false } : undefined);
+      });
 
     this.context.connect('maxQuantity', this.checkoutFacade.basketMaxItemQuantity$);
     this.loading$ = this.context.select('loading');

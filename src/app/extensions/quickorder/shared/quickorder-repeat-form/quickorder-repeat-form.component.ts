@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { FieldArrayType, FormlyFieldConfig } from '@ngx-formly/core';
 import { Subject } from 'rxjs';
-import { debounceTime, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, takeUntil } from 'rxjs/operators';
 
 import { ProductContextDirective } from 'ish-core/directives/product-context.directive';
 import { ProductContextFacade } from 'ish-core/facades/product-context.facade';
@@ -58,16 +58,11 @@ export class QuickorderRepeatFormComponent extends FieldArrayType implements Aft
       context.context.connect('sku', formControl.valueChanges.pipe(debounceTime(500)));
       context.context
         .select('product')
-        .pipe(
-          tap(product => {
-            formControl.setErrors(
-              product.failed && formControl.value.trim !== '' ? { validProduct: false } : undefined
-            );
-            this.cdRef.markForCheck();
-          }),
-          takeUntil(this.contextUpdate$)
-        )
-        .subscribe();
+        .pipe(takeUntil(this.contextUpdate$))
+        .subscribe(product => {
+          formControl.setErrors(product.failed && formControl.value.trim !== '' ? { validProduct: false } : undefined);
+          this.cdRef.markForCheck();
+        });
     });
   }
 
