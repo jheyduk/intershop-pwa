@@ -22,7 +22,6 @@ import { ProductContextFacade } from 'ish-core/facades/product-context.facade';
 export class QuickorderRepeatFormComponent extends FieldArrayType implements AfterViewInit, OnDestroy {
   @ViewChildren(ProductContextDirective) contexts: QueryList<{ context: ProductContextFacade }>;
 
-  private destroy$ = new Subject();
   private contextUpdate$ = new Subject();
 
   constructor(private cdRef: ChangeDetectorRef) {
@@ -34,8 +33,6 @@ export class QuickorderRepeatFormComponent extends FieldArrayType implements Aft
   }
 
   ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
     this.contextUpdate$.next();
     this.contextUpdate$.complete();
   }

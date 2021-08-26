@@ -12,13 +12,11 @@ import { SkuQuantityType } from 'ish-core/models/product/product.helper';
   templateUrl: './quickorder-add-products-form.component.html',
   changeDetection: ChangeDetectionStrategy.Default,
 })
-export class QuickorderAddProductsFormComponent implements OnInit, OnDestroy {
+export class QuickorderAddProductsFormComponent implements OnInit {
   quickOrderForm: FormGroup = new FormGroup({});
   model: { addProducts: SkuQuantityType[] } = { addProducts: [] };
   options: FormlyFormOptions = {};
   fields: FormlyFieldConfig[];
-
-  private destroy$ = new Subject();
 
   numberOfRows = 5;
 
@@ -94,10 +92,5 @@ export class QuickorderAddProductsFormComponent implements OnInit, OnDestroy {
         },
       },
     ];
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 }
