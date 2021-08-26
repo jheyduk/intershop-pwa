@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { TranslateService } from '@ngx-translate/core';
 import { EMPTY, Subject } from 'rxjs';
-import { takeUntil, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { ProductContextFacade } from 'ish-core/facades/product-context.facade';
 import { ShoppingFacade } from 'ish-core/facades/shopping.facade';
@@ -76,9 +76,6 @@ export class QuickorderAddProductsFormComponent implements OnInit, OnDestroy {
               key: 'sku',
               type: 'ish-text-input-field',
               className: 'col-12 list-item search-container',
-              modelOptions: {
-                debounce: { default: 500 },
-              },
               templateOptions: {
                 fieldClass: 'col-12',
                 placeholder: 'shopping_cart.direct_order.item_placeholder',
@@ -90,12 +87,12 @@ export class QuickorderAddProductsFormComponent implements OnInit, OnDestroy {
                     if (context) {
                       return context.select('product').pipe(
                         whenTruthy(),
-                        tap(product => {
-                          control.setErrors(
-                            product.failed && control.value.trim !== '' ? { validProduct: false } : undefined
-                          );
-                        }),
-                        takeUntil(this.destroy$)
+                        map(product => {
+                          return { validProduct: false };
+                          // control.setErrors(
+                          //   product.failed && control.value.trim !== '' ? { validProduct: false } : undefined
+                          // );
+                        })
                       );
                     } else {
                       return EMPTY;
