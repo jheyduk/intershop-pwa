@@ -1,14 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { TranslateService } from '@ngx-translate/core';
-import { EMPTY, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
-import { ProductContextFacade } from 'ish-core/facades/product-context.facade';
 import { ShoppingFacade } from 'ish-core/facades/shopping.facade';
 import { SkuQuantityType } from 'ish-core/models/product/product.helper';
-import { whenTruthy } from 'ish-core/utils/operators';
 
 @Component({
   selector: 'ish-quickorder-add-products-form',
@@ -80,36 +77,16 @@ export class QuickorderAddProductsFormComponent implements OnInit, OnDestroy {
                 fieldClass: 'col-12',
                 placeholder: 'shopping_cart.direct_order.item_placeholder',
               },
-              asyncValidators: {
-                validProduct: {
-                  expression: (control: FormControl, config: FormlyFieldConfig) => {
-                    const context: ProductContextFacade = config.templateOptions.context;
-                    if (context) {
-                      return context.select('product').pipe(
-                        whenTruthy(),
-                        map(product => {
-                          return { validProduct: false };
-                          // control.setErrors(
-                          //   product.failed && control.value.trim !== '' ? { validProduct: false } : undefined
-                          // );
-                        })
-                      );
-                    } else {
-                      return EMPTY;
-                    }
-                  },
-                  message: (_: unknown, field: FormlyFieldConfig) =>
-                    this.translate.get('quickorder.page.error.invalid.product', {
-                      0: this.model.addProducts[parseInt(field.parent.key.toString(), 10)].sku,
-                    }),
-                },
-              },
               expressionProperties: {
                 'templateOptions.required': (control: SkuQuantityType) => !!control.quantity,
               },
               validation: {
                 messages: {
                   required: 'quickorder.page.quantityWithoutSKU',
+                  validProduct: (_: unknown, field: FormlyFieldConfig) =>
+                    this.translate.get('quickorder.page.error.invalid.product', {
+                      0: this.model.addProducts[parseInt(field.parent.key.toString(), 10)].sku,
+                    }),
                 },
               },
             },

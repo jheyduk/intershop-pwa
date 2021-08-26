@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { FieldArrayType, FormlyFieldConfig } from '@ngx-formly/core';
 import { Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, takeUntil, tap } from 'rxjs/operators';
 
 import { ProductContextDirective } from 'ish-core/directives/product-context.directive';
 import { ProductContextFacade } from 'ish-core/facades/product-context.facade';
@@ -23,6 +23,7 @@ export class QuickorderRepeatFormComponent extends FieldArrayType implements Aft
   @ViewChildren(ProductContextDirective) contexts: QueryList<{ context: ProductContextFacade }>;
 
   private destroy$ = new Subject();
+  private contextUpdate$ = new Subject();
 
   constructor(private cdRef: ChangeDetectorRef) {
     super();
@@ -35,6 +36,8 @@ export class QuickorderRepeatFormComponent extends FieldArrayType implements Aft
   ngOnDestroy() {
     this.destroy$.next();
     this.destroy$.complete();
+    this.contextUpdate$.next();
+    this.contextUpdate$.complete();
   }
 
   addMultipleRows(rows: number) {
@@ -46,13 +49,25 @@ export class QuickorderRepeatFormComponent extends FieldArrayType implements Aft
 
   updateContexts() {
     this.cdRef.detectChanges();
+    this.contextUpdate$.next();
     this.contexts.forEach((context: { context: ProductContextFacade }, index) => {
-      this.addContextToTemplateOptions(context.context, this.field.fieldGroup[index].fieldGroup[0]);
+      const field = this.field.fieldGroup[index].fieldGroup[0];
+      const formControl = field.formControl;
+      this.addContextToTemplateOptions(context.context, field);
 
-      context.context.connect(
-        'sku',
-        this.field.fieldGroup[index].fieldGroup[0].formControl.valueChanges.pipe(debounceTime(500))
-      );
+      context.context.connect('sku', formControl.valueChanges.pipe(debounceTime(500)));
+      context.context
+        .select('product')
+        .pipe(
+          tap(product => {
+            formControl.setErrors(
+              product.failed && formControl.value.trim !== '' ? { validProduct: false } : undefined
+            );
+            this.cdRef.markForCheck();
+          }),
+          takeUntil(this.contextUpdate$)
+        )
+        .subscribe();
     });
   }
 

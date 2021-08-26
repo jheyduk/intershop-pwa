@@ -6,12 +6,7 @@
 
   <formly-form [model]="model" [fields]="fields" [options]="options" [form]="quickOrderForm" class="pt-1"></formly-form>
 
-  <button
-    type="submit"
-    class="btn btn-primary"
-    [disabled]="quickOrderForm.pristine || quickOrderForm.invalid"
-    data-testing-id="add-form-to-cart"
-  >
+  <button type="submit" class="btn btn-primary" [disabled]="quickOrderForm.pristine" data-testing-id="add-form-to-cart">
     {{ 'quickorder.page.add.cart' | translate }}
   </button>
 
