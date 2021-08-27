@@ -1,0 +1,22 @@
+ports:
+  - port: 4200
+image:
+  file: .gitpod.Dockerfile
+tasks:
+  - init: NG_CLI_ANALYTICS=true npm install
+    command: ng serve
+vscode:
+  extensions:
+    - eamodio.gitlens
+    - vscode-icons-team.vscode-icons
+    - coenraads.bracket-pair-colorizer
+    - vincaslt.highlight-matching-tag
+    - angular.ng-template
+    - mikael.angular-beastcode
+    - editorconfig.editorconfig
+    - esbenp.prettier-vscode
+    - stylelint.vscode-stylelint
+    - csstools.postcss
+    - ms-vscode.vscode-typescript-tslint-plugin
+    - streetsidesoftware.code-spell-checker
+    - yzhang.markdown-all-in-one
