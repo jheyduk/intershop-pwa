@@ -2,10 +2,10 @@ ports:
   - port: 4200
 tasks:
   - init: |
-      npm i --ignore-scripts -g npm
-      npm i --ignore-scripts -g @angular/cli
-      npm i --ignore-scripts
-    command: npm i --ignore-scripts && ng serve
+      npm i -g npm
+      npm i -g @angular/cli
+      npm i
+    command: npm i && ng serve
 vscode:
   extensions:
     - eamodio.gitlens
