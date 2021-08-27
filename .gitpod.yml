@@ -1,0 +1,23 @@
+ports:
+  - port: 4200
+tasks:
+  - init: |
+      npm i --ignore-scripts -g npm
+      npm i --ignore-scripts -g @angular/cli
+      npm i --ignore-scripts
+    command: npm i --ignore-scripts && ng serve
+vscode:
+  extensions:
+    - eamodio.gitlens
+    - vscode-icons-team.vscode-icons
+    - coenraads.bracket-pair-colorizer
+    - vincaslt.highlight-matching-tag
+    - angular.ng-template
+    - mikael.angular-beastcode
+    - editorconfig.editorconfig
+    - esbenp.prettier-vscode
+    - stylelint.vscode-stylelint
+    - csstools.postcss
+    - ms-vscode.vscode-typescript-tslint-plugin
+    - streetsidesoftware.code-spell-checker
+    - yzhang.markdown-all-in-one
