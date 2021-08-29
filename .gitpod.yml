@@ -1,7 +1,7 @@
 ports:
   - port: 4200
 tasks:
-  - before: |
+  - init: |
       npm i -g npm
       npm i -g @angular/cli
       npm i
