@@ -29,6 +29,7 @@ export type BasketUpdateType =
   | { invoiceToAddress: string }
   | { commonShipToAddress: string }
   | { commonShippingMethod: string }
+  | { costCenter: string }
   | { calculated: boolean };
 
 export type BasketItemUpdateType =
@@ -202,7 +203,6 @@ export class BasketService {
         headers: this.basketHeaders.set(ApiService.TOKEN_HEADER_KEY, apiToken),
         params,
         skipApiErrorHandling: true,
-        runExclusively: true,
       })
       .pipe(
         map(BasketMapper.fromData),

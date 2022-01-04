@@ -55,6 +55,7 @@ import { AddressComponent } from './components/address/address/address.component
 import { BasketAddressSummaryComponent } from './components/basket/basket-address-summary/basket-address-summary.component';
 import { BasketApprovalInfoComponent } from './components/basket/basket-approval-info/basket-approval-info.component';
 import { BasketBuyerComponent } from './components/basket/basket-buyer/basket-buyer.component';
+import { BasketCostCenterSelectionComponent } from './components/basket/basket-cost-center-selection/basket-cost-center-selection.component';
 import { BasketCostSummaryComponent } from './components/basket/basket-cost-summary/basket-cost-summary.component';
 import { BasketInfoComponent } from './components/basket/basket-info/basket-info.component';
 import { BasketItemsSummaryComponent } from './components/basket/basket-items-summary/basket-items-summary.component';
@@ -73,6 +74,7 @@ import { BreadcrumbComponent } from './components/common/breadcrumb/breadcrumb.c
 import { ErrorMessageComponent } from './components/common/error-message/error-message.component';
 import { InPlaceEditComponent } from './components/common/in-place-edit/in-place-edit.component';
 import { InfoBoxComponent } from './components/common/info-box/info-box.component';
+import { InfoMessageComponent } from './components/common/info-message/info-message.component';
 import { LoadingComponent } from './components/common/loading/loading.component';
 import { ModalDialogLinkComponent } from './components/common/modal-dialog-link/modal-dialog-link.component';
 import { ModalDialogComponent } from './components/common/modal-dialog/modal-dialog.component';
@@ -98,6 +100,7 @@ import { OrderListComponent } from './components/order/order-list/order-list.com
 import { OrderWidgetComponent } from './components/order/order-widget/order-widget.component';
 import { ProductAddToBasketComponent } from './components/product/product-add-to-basket/product-add-to-basket.component';
 import { ProductAddToCompareComponent } from './components/product/product-add-to-compare/product-add-to-compare.component';
+import { ProductAttachmentsComponent } from './components/product/product-attachments/product-attachments.component';
 import { ProductAttributesComponent } from './components/product/product-attributes/product-attributes.component';
 import { ProductBundleDisplayComponent } from './components/product/product-bundle-display/product-bundle-display.component';
 import { ProductChooseVariationComponent } from './components/product/product-choose-variation/product-choose-variation.component';
@@ -217,6 +220,7 @@ const exportedComponents = [
   BasketAddressSummaryComponent,
   BasketApprovalInfoComponent,
   BasketBuyerComponent,
+  BasketCostCenterSelectionComponent,
   BasketCostSummaryComponent,
   BasketInfoComponent,
   BasketInvoiceAddressWidgetComponent,
@@ -237,6 +241,7 @@ const exportedComponents = [
   IdentityProviderLoginComponent,
   InPlaceEditComponent,
   InfoBoxComponent,
+  InfoMessageComponent,
   LineItemListComponent,
   LoadingComponent,
   LoginFormComponent,
@@ -247,6 +252,7 @@ const exportedComponents = [
   OrderWidgetComponent,
   ProductAddToBasketComponent,
   ProductAddToCompareComponent,
+  ProductAttachmentsComponent,
   ProductAttributesComponent,
   ProductBundleDisplayComponent,
   ProductIdComponent,

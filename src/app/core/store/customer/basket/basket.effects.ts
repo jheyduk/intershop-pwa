@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { routerNavigatedAction } from '@ngrx/router-store';
@@ -50,6 +51,7 @@ import {
   submitBasketFail,
   submitBasketSuccess,
   updateBasket,
+  updateBasketCostCenter,
   updateBasketFail,
   updateBasketShippingMethod,
 } from './basket.actions';
@@ -62,7 +64,8 @@ export class BasketEffects {
     private basketService: BasketService,
     private apiTokenService: ApiTokenService,
     private router: Router,
-    private store: Store
+    private store: Store,
+    @Inject(PLATFORM_ID) private platformId: string
   ) {}
 
   /**
@@ -72,10 +75,12 @@ export class BasketEffects {
     this.actions$.pipe(
       ofType(loadBasket),
       mergeMap(() =>
-        this.basketService.getBasket().pipe(
-          map(basket => loadBasketSuccess({ basket })),
-          mapErrorToAction(loadBasketFail)
-        )
+        isPlatformBrowser(this.platformId) && window.sessionStorage.getItem('basket-id')
+          ? of(loadBasketWithId({ basketId: window.sessionStorage.getItem('basket-id') }))
+          : this.basketService.getBasket().pipe(
+              map(basket => loadBasketSuccess({ basket })),
+              mapErrorToAction(loadBasketFail)
+            )
       )
     )
   );
@@ -165,6 +170,17 @@ export class BasketEffects {
       ofType(updateBasketShippingMethod),
       mapToPayloadProperty('shippingId'),
       map(commonShippingMethod => updateBasket({ update: { commonShippingMethod } }))
+    )
+  );
+
+  /**
+   * Sets a cost center at the current basket.
+   */
+  updateBasketCostCenter$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updateBasketCostCenter),
+      mapToPayloadProperty('costCenter'),
+      map(costCenter => updateBasket({ update: { costCenter } }))
     )
   );
 

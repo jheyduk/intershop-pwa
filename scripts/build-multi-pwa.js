@@ -8,19 +8,20 @@ const configurations = (process.env.npm_config_active_themes || process.env.npm_
 
 const builds = [];
 
-if (process.argv.length === 2 || process.argv[2] === 'client')
+const processArgs = process.argv.slice(2);
+const extraArgs = processArgs.filter(a => a !== 'client' && a !== 'server').join(' ');
+
+if (processArgs.includes('client') || !processArgs.includes('server'))
   builds.push(
-    ...configurations.map(
-      ({ theme }) =>
-        `build client --configuration=${theme},production -- --output-path=dist/${theme}/browser --progress=false`
+    ...configurations.map(({ theme }) =>
+      `build client --configuration=${theme},production -- --output-path=dist/${theme}/browser --progress=false ${extraArgs}`.trim()
     )
   );
 
-if (process.argv.length === 2 || process.argv[2] === 'server')
+if (processArgs.includes('server') || !processArgs.includes('client'))
   builds.push(
-    ...configurations.map(
-      ({ theme }) =>
-        `build server --configuration=${theme},production -- --output-path=dist/${theme}/server --progress=false`
+    ...configurations.map(({ theme }) =>
+      `build server --configuration=${theme},production -- --output-path=dist/${theme}/server --progress=false ${extraArgs}`.trim()
     )
   );
 
@@ -32,7 +33,7 @@ if (parallel) {
 
 const result = cp.spawnSync(
   path.join('node_modules', '.bin', 'npm-run-all' + (process.platform === 'win32' ? '.cmd' : '')),
-  [...parallel, ...builds],
+  ['--silent', ...parallel, ...builds],
   {
     stdio: 'inherit',
   }
@@ -42,11 +43,12 @@ if (result.status !== 0) {
 }
 
 fs.writeFileSync(
-  'dist/ecosystem-ports.js',
-  `exports.ports = {
-${configurations.map(config => `    '${config.theme}': ${config.port},`).join('\n')}
-}
-`
+  'src/ssr/server-scripts/ecosystem-ports.json',
+  JSON.stringify(
+    configurations.reduce((acc, { theme, port }) => ({ ...acc, [theme]: port }), {}),
+    undefined,
+    2
+  )
 );
 
 configurations.forEach(({ theme }) => {

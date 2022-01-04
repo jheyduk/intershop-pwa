@@ -79,9 +79,11 @@ export class Component {
 
 ### Localization with Pluralization
 
-The PWA uses an [ICU Message Format](http://userguide.icu-project.org/formatparse/messages) inspired way of supporting pluralization in translation keys.
+The PWA uses an [ICU Message Format](https://unicode-org.github.io/icu/userguide/format_parse/messages/) inspired way of supporting pluralization in translation keys.
 
 Have a look at the spec for [PWATranslateCompiler](../../src/app/core/utils/translate/pwa-translate-compiler.spec.ts) for an overview of supported methods.
+
+> :warning: Translations with large values (> 1000 characters) will not be compiled to improve performance. We recommend using CMS components instead. If you _really_ need to increase this limit, adapt the `MAX_COMPILATION_LENGTH` variable of [PWATranslateCompiler](../../src/app/core/utils/translate/pwa-translate-compiler.ts).
 
 ### Localization with Formatted Dates
 

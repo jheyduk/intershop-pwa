@@ -5,9 +5,9 @@ import { Observable, OperatorFunction } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Address } from 'ish-core/models/address/address.model';
+import { SelectOption } from 'ish-core/models/select-option/select-option.model';
 import { getCurrentLocale } from 'ish-core/store/core/configuration';
 import { whenTruthy } from 'ish-core/utils/operators';
-import { SelectOption } from 'ish-shared/forms/components/select/select.component';
 
 /**
  * FormsService.getAddressOptions as a pipeable operator
@@ -37,6 +37,19 @@ export class FormsService {
       )
     );
   }
+
+  /**
+   * Gets budget period select options for cost center budgets.
+   */
+  static getCostCenterBudgetPeriodOptions() {
+    const periods = ['fixed', 'weekly', 'monthly', 'quarterly'];
+
+    return periods.map(period => ({
+      value: period,
+      label: `account.costcenter.budget.period.value.${period}`,
+    }));
+  }
+
   /**
    * Gets all possible salutation options for a certain country.
    * @param translate instance of a translation service

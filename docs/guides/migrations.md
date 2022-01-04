@@ -7,6 +7,28 @@ kb_sync_latest_only
 
 # Migrations
 
+## 1.4 to 2.0
+
+With version 2.0 we introduce a renaming of the two standard PWA themes and change the default theme:
+
+- The previous B2B theme `blue` is now called `b2b` and is used as default theme from now on.
+- The previous B2C theme `default` is now called `b2c`.
+
+With this change the according folders and references had to be renamed/moved and need to be adapted in customer projects as well.
+In projects where the recommended procedure for using a custom theme has been followed (see [Customization Guide - Start Customization](./customizations.md#start-customization)), minimal migration effort should be required.
+
+We moved the model `SelectOption` from the select.component.ts to the select-option.model.ts and adapted all necessary imports.
+
+In the PWA 0.28 we introduced the usage of [Formly](https://formly.dev/) to generate and maintain our forms.
+Now we removed the obsolete form components.
+If you want to use the obsolete form components in your project nevertheless, skip the commit `remove obsolete form components`.
+For more information concerning Formly please refer to our [Formly - Guide](./formly.md)).
+
+## 1.1 to 1.2
+
+The `dist` folder now only contains results of the build process (except for `healthcheck.js`).
+You must **not** edit any file inside that `dist` folder, since this would include not being able to change Kubernetes liveness or readiness probes we included SSR container related source code under `src/ssr/server-scripts/`
+
 ## 0.31 to 1.0
 
 The Angular configuration mechanism of the Intershop PWA was refactored to support running multiple configurations in one docker image (see [Guide - Multiple Themes](./multiple-themes.md)).

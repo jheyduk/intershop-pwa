@@ -40,6 +40,7 @@ import {
   submitBasket,
   submitBasketFail,
   updateBasket,
+  updateBasketCostCenter,
   updateBasketFail,
   updateBasketShippingMethod,
 } from './basket.actions';
@@ -111,6 +112,22 @@ describe('Basket Effects', () => {
       const expected$ = cold('-c-c-c', { c: completion });
 
       expect(effects.loadBasket$).toBeObservable(expected$);
+    });
+
+    describe('with basket-id in session storage', () => {
+      beforeEach(() => {
+        window.sessionStorage.clear();
+      });
+
+      it('should map to action of type LoadBasketWithId', () => {
+        window.sessionStorage.setItem('basket-id', 'BID');
+        const action = loadBasket();
+        const completion = loadBasketWithId({ basketId: 'BID' });
+        actions$ = hot('-a-a-a', { a: action });
+        const expected$ = cold('-c-c-c', { c: completion });
+
+        expect(effects.loadBasket$).toBeObservable(expected$);
+      });
     });
   });
 
@@ -323,6 +340,20 @@ describe('Basket Effects', () => {
       const expected$ = cold('-c-c-c', { c: completion });
 
       expect(effects.updateBasketShippingMethod$).toBeObservable(expected$);
+    });
+  });
+
+  describe('updateBasketCostCenter$', () => {
+    it('should trigger the updateBasket action if called', () => {
+      const costCenter = 'costCenter123';
+      const action = updateBasketCostCenter({ costCenter });
+      const completion = updateBasket({
+        update: { costCenter },
+      });
+      actions$ = hot('-a-a-a', { a: action });
+      const expected$ = cold('-c-c-c', { c: completion });
+
+      expect(effects.updateBasketCostCenter$).toBeObservable(expected$);
     });
   });
 
