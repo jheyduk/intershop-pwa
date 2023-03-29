@@ -36,7 +36,6 @@ describe('Organization Management Breadcrumb Service', () => {
     @Component({ template: 'dummy' })
     class DummyComponent {}
     TestBed.configureTestingModule({
-      declarations: [DummyComponent],
       imports: [
         AuthorizationToggleModule.forTesting('APP_B2B_MANAGE_USERS', 'APP_B2B_MANAGE_COSTCENTER'),
         CoreStoreModule.forTesting(['router', 'configuration']),
@@ -66,7 +65,9 @@ describe('Organization Management Breadcrumb Service', () => {
       it('should not report a breadcrumb for unrelated routes', fakeAsync(() => {
         router.navigateByUrl('/foobar');
 
-        organizationManagementBreadcrumbService.breadcrumb$('/my-account').subscribe(fail, fail, fail);
+        organizationManagementBreadcrumbService
+          .breadcrumb$('/my-account')
+          .subscribe({ next: fail, error: fail, complete: fail });
 
         tick(2000);
       }));

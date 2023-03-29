@@ -10,6 +10,7 @@ import { CostCenter } from 'ish-core/models/cost-center/cost-center.model';
 import { Price } from 'ish-core/models/price/price.model';
 import { PricePipe } from 'ish-core/models/price/price.pipe';
 import { User } from 'ish-core/models/user/user.model';
+import { ErrorMessageComponent } from 'ish-shared/components/common/error-message/error-message.component';
 import { OrderListComponent } from 'ish-shared/components/order/order-list/order-list.component';
 
 import { CostCenterBudgetComponent } from '../../components/cost-center-budget/cost-center-budget.component';
@@ -48,6 +49,7 @@ describe('Cost Center Detail Page Component', () => {
         CostCenterDetailPageComponent,
         MockComponent(CostCenterBudgetComponent),
         MockComponent(CostCenterUsersListComponent),
+        MockComponent(ErrorMessageComponent),
         MockComponent(FaIconComponent),
         MockComponent(OrderListComponent),
         MockPipe(PricePipe, (price: Price) => `${price.currency} ${price.value}`),

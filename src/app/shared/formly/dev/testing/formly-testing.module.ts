@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
+import { Component, ModuleWithProviders, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FieldType, FieldWrapper, FormlyFieldConfig, FormlyForm, FormlyModule } from '@ngx-formly/core';
+import { FORMLY_CONFIG, FieldType, FieldWrapper, FormlyFieldConfig, FormlyForm, FormlyModule } from '@ngx-formly/core';
 import { FormlySelectModule } from '@ngx-formly/core/select';
 
-// tslint:disable: project-structure
+/* eslint-disable ish-custom-rules/project-structure */
+/* eslint-disable ish-custom-rules/require-formly-code-documentation */
 
 @Component({ template: 'CaptchaFieldComponent: {{ field.key }} {{ to | json }}' })
 class CaptchaFieldComponent extends FieldType {}
@@ -56,15 +57,20 @@ class SelectFieldComponent extends FieldType {}
 @Component({ template: 'TextareaFieldComponent: {{ field.key }} {{ field.type }} {{ to | json }}' })
 class TextareaFieldComponent extends FieldType {}
 
+@Component({ template: 'DummyLibraryFieldComponent: {{ field.key }}' })
+class DummyLibraryFieldComponent extends FieldType {}
+
 @Component({ template: `<ng-template #fieldComponent> </ng-template>` })
 class DummyWrapperComponent extends FieldWrapper {}
 
-// tslint:enable: project-structure
+@Component({ template: 'DatePickerFieldComponent: {{ field.key }} {{ field.type }} {{ to | json }}' })
+class DatePickerFieldComponent extends FieldType {}
 
 @NgModule({
   declarations: [
     CaptchaFieldComponent,
     CheckboxFieldComponent,
+    DatePickerFieldComponent,
     DummyWrapperComponent,
     EmailFieldComponent,
     FieldsetFieldComponent,
@@ -73,8 +79,8 @@ class DummyWrapperComponent extends FieldWrapper {}
     PlainTextFieldComponent,
     RadioFieldComponent,
     SelectFieldComponent,
-    TextInputFieldComponent,
     TextareaFieldComponent,
+    TextInputFieldComponent,
   ],
   imports: [
     CommonModule,
@@ -122,6 +128,7 @@ class DummyWrapperComponent extends FieldWrapper {}
         },
         { name: 'ish-radio-field', component: RadioFieldComponent },
         { name: 'ish-captcha-field', component: CaptchaFieldComponent },
+        { name: 'ish-date-picker-field', component: DatePickerFieldComponent },
       ],
       wrappers: [
         { name: 'form-field-horizontal', component: DummyWrapperComponent },
@@ -138,5 +145,27 @@ class DummyWrapperComponent extends FieldWrapper {}
   ],
   exports: [FormlyForm, ReactiveFormsModule],
 })
-// tslint:disable-next-line: project-structure
-export class FormlyTestingModule {}
+export class FormlyTestingModule {
+  static withPresetMocks(libraryMockTypes: string[] = []): ModuleWithProviders<FormlyTestingModule> {
+    return {
+      ngModule: FormlyTestingModule,
+      providers: [
+        {
+          provide: FORMLY_CONFIG,
+          multi: true,
+          useValue: {
+            types: [
+              libraryMockTypes
+                .map(libraryMockType => (libraryMockType.startsWith('#') ? libraryMockType : `#${libraryMockType}`))
+                .map(name => ({
+                  name,
+                  component: DummyLibraryFieldComponent,
+                  defaultOptions: { key: name.substring(1) },
+                })),
+            ],
+          },
+        },
+      ],
+    };
+  }
+}

@@ -25,7 +25,7 @@ export class FeatureToggleDirective implements OnDestroy {
   private enabled$ = new BehaviorSubject<boolean>(undefined);
   private tick$ = new BehaviorSubject<void>(undefined);
 
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
 
   constructor(
     private templateRef: TemplateRef<unknown>,
@@ -55,7 +55,7 @@ export class FeatureToggleDirective implements OnDestroy {
   @Input() set ishFeature(feature: string) {
     // end previous subscription and newly subscribe
     if (this.subscription) {
-      // tslint:disable-next-line: ban
+      // eslint-disable-next-line ban/ban
       this.subscription.unsubscribe();
     }
 

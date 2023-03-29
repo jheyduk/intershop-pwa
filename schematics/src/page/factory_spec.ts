@@ -1,15 +1,15 @@
 import { UnitTestTree } from '@angular-devkit/schematics/testing';
+import { PWAPageOptionsSchema as Options } from 'schemas/page/schema';
 
 import { createApplication, createSchematicRunner } from '../utils/testHelper';
-
-import { PWAPageOptionsSchema as Options } from './schema';
 
 describe('Page Schematic', () => {
   const schematicRunner = createSchematicRunner();
 
   let appTree: UnitTestTree;
   beforeEach(async () => {
-    appTree = await createApplication(schematicRunner).toPromise();
+    const appTree$ = createApplication(schematicRunner);
+    appTree = await appTree$.toPromise();
 
     appTree.create(
       '/src/app/pages/app-routing.module.ts',

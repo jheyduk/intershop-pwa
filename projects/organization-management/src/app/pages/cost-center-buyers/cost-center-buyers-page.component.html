@@ -1,5 +1,9 @@
 <h1>{{ 'account.costcenter.details.buyers.heading' | translate }}</h1>
 
+<!--
+    in ICM versions lower than 7.10.38 the cost center admin is not allowed to read the list of users for the customer
+    keep-localization-pattern: ^subject.has.no.permission.assigned$
+  -->
 <ish-error-message [error]="error$ | async"></ish-error-message>
 
 <ng-container *ngIf="buyers$ | async as buyers; else emptyList">
@@ -41,7 +45,7 @@
   </div>
 </ng-container>
 <ng-template #emptyList>
-  <p *ngIf="!(error$ | async)" data-testing-id="empty-buyer-list">
+  <p *ngIf="!!(error$ | async) === false" data-testing-id="empty-buyer-list">
     {{ 'account.costcenter.details.add.buyers.list.empty' | translate }}
   </p>
 

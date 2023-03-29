@@ -33,7 +33,7 @@ export class UserBudgetFormComponent implements OnInit, OnDestroy {
 
   periods = ['weekly', 'monthly', 'quarterly'];
 
-  private destroy$ = new Subject();
+  private destroy$ = new Subject<void>();
 
   constructor(private appFacade: AppFacade) {}
 
@@ -133,6 +133,7 @@ export class UserBudgetFormComponent implements OnInit, OnDestroy {
                   fieldClass: 'col-12 label-empty',
                   options: this.periods.map(period => ({
                     value: period,
+                    // keep-localization-pattern: ^account\.user\.new\.budget\.period\.value.*
                     label: `account.user.new.budget.period.value.${period}`,
                   })),
                 },

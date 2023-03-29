@@ -70,7 +70,7 @@
 
       <!-- Shipping Method -->
       <ish-info-box heading="checkout.widget.shipping_method.heading" class="infobox-wrapper col-md-6">
-        <p>{{ requisition.commonShippingMethod?.name }}</p>
+        <ish-basket-shipping-method [data]="requisition"></ish-basket-shipping-method>
       </ish-info-box>
     </div>
 
@@ -104,7 +104,10 @@
         </button>
       </div>
     </ng-template>
-    <ish-requisition-reject-dialog #rejectDialog (submit)="rejectRequisition($event)"></ish-requisition-reject-dialog>
+    <ish-requisition-reject-dialog
+      #rejectDialog
+      (submitRejectRequisition)="rejectRequisition($event)"
+    ></ish-requisition-reject-dialog>
 
     <div class="section d-flex d-flex justify-content-between">
       <a [routerLink]="['../', { status: requisition.approval.statusCode }]">

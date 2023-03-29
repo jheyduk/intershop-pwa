@@ -1,3 +1,4 @@
+/* eslint-disable ish-custom-rules/no-intelligence-in-artifacts */
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ActivatedRoute, ActivatedRouteSnapshot, UrlSegment } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
@@ -6,14 +7,12 @@ import { of } from 'rxjs';
 import { anything, instance, mock, verify, when } from 'ts-mockito';
 
 import { AccountFacade } from 'ish-core/facades/account.facade';
-import { RegistrationFormConfigurationService } from 'ish-core/services/registration-form-configuration/registration-form-configuration.service';
 import { ErrorMessageComponent } from 'ish-shared/components/common/error-message/error-message.component';
-import { LoadingComponent } from 'ish-shared/components/common/loading/loading.component';
 import { FormlyTestingModule } from 'ish-shared/formly/dev/testing/formly-testing.module';
 
 import { RegistrationPageComponent } from './registration-page.component';
+import { RegistrationFormConfigurationService } from './services/registration-form-configuration/registration-form-configuration.service';
 
-// tslint:disable:no-intelligence-in-artifacts
 describe('Registration Page Component', () => {
   let fixture: ComponentFixture<RegistrationPageComponent>;
   let component: RegistrationPageComponent;
@@ -27,12 +26,12 @@ describe('Registration Page Component', () => {
     configService = mock(RegistrationFormConfigurationService);
     activatedRoute = mock(ActivatedRoute);
     await TestBed.configureTestingModule({
-      declarations: [MockComponent(ErrorMessageComponent), MockComponent(LoadingComponent), RegistrationPageComponent],
+      declarations: [MockComponent(ErrorMessageComponent), RegistrationPageComponent],
       imports: [FormlyTestingModule, TranslateModule.forRoot()],
       providers: [
+        { provide: AccountFacade, useFactory: () => instance(accountFacade) },
         { provide: ActivatedRoute, useFactory: () => instance(activatedRoute) },
         { provide: RegistrationFormConfigurationService, useFactory: () => instance(configService) },
-        { provide: AccountFacade, useFactory: () => instance(accountFacade) },
       ],
     }).compileComponents();
 
